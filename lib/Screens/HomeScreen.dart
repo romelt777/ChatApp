@@ -8,10 +8,11 @@ class Homescreen extends StatefulWidget {
 }
 
 //needs ticker for animations
-class _HomescreenState extends State<Homescreen> with SingleTickerProviderStateMixin{
+class _HomescreenState extends State<Homescreen> with SingleTickerProviderStateMixin {
     late TabController _controller; //assign later
     @override
-    void initState() { //runs once when widget is created
+    void initState() {
+        //runs once when widget is created
         super.initState();
         _controller = TabController(length: 4, vsync: this, initialIndex: 1);
     }
@@ -23,27 +24,30 @@ class _HomescreenState extends State<Homescreen> with SingleTickerProviderStateM
                 title: Text("WhatsApp Clone"),
                 actions: [
                 IconButton(onPressed: () {}, icon: Icon(Icons.search)),
-                IconButton(onPressed: () {}, icon: Icon(Icons.more_vert)),
+                PopupMenuButton<String>(
+                    onSelected: (value) =>{
+                        print(value)
+                    },
+                    itemBuilder: (BuildContext context) {
+                        return [
+                            PopupMenuItem(value: "New Group",child: Text("New Group")),
+                            PopupMenuItem(value: "New Broadcast",child: Text("New Broadcast")),
+                            PopupMenuItem(value: "WhatsApp Web",child: Text("WhatsApp Web")),
+                            PopupMenuItem(value: "Starred Message",child: Text("Starred Message")),
+                            PopupMenuItem(value: "Settings",child: Text("Settings")),
+                        ];
+                    },
+                ),
                 ],
                 bottom: TabBar(
-                    controller: _controller,
-                    tabs: [
-                        Tab(icon: Icon(Icons.camera_alt)),
-                        Tab(text: "CHATS"),
-                        Tab(text: "STATUS"),
-                        Tab(text: "CALLS"),                                
-                    ]
+                controller: _controller,
+                tabs: [Tab(icon: Icon(Icons.camera_alt)), Tab(text: "CHATS"), Tab(text: "STATUS"), Tab(text: "CALLS")],
                 ),
             ),
-            body:TabBarView(
+            body: TabBarView(
                 controller: _controller,
-                children: [
-                    Text("Camera"),
-                    Text("Chats"),
-                    Text("Status"),
-                    Text("Calls"),
-                ],
-            ),  
+                children: [Text("Camera"), Text("Chats"), Text("Status"), Text("Calls")],
+            ),
         );
     }
 }
