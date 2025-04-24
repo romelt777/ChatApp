@@ -1,4 +1,4 @@
-import 'package:chat_app/Screens/HomeScreen.dart';
+import 'package:chat_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -26,7 +26,7 @@ class MainApp extends StatelessWidget {
           secondary: const Color(0xFF128C7E),
         ),
       ),
-      home: Homescreen(),
+      home: HomeScreen(),
   
     );
   }
