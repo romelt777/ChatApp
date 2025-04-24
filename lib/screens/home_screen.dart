@@ -18,11 +18,11 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     _controller = TabController(length: 4, vsync: this, initialIndex: 1);
   }
 
-  // @override
-  // void dispose() {
-  //   _controller.dispose();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
