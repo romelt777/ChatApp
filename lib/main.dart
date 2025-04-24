@@ -18,6 +18,10 @@ class MainApp extends StatelessWidget {
           backgroundColor: Color(0xFF075E54),
           foregroundColor: Colors.white
         ),
+        tabBarTheme: const TabBarTheme(
+          labelColor: Colors.white,
+          unselectedLabelColor: Colors.white70,
+        ),
         colorScheme: ColorScheme.fromSwatch().copyWith(
           secondary: const Color(0xFF128C7E),
         ),
