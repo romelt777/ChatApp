@@ -12,6 +12,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
+        fontFamily: "OpenSans",
         primaryColor: const Color(0xFF075E54),
         //appBar theme
         appBarTheme: const AppBarTheme(
