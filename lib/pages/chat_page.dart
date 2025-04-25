@@ -1,4 +1,5 @@
 import 'package:chat_app/customui/custom_card.dart';
+import 'package:chat_app/data/chat_data.dart';
 import 'package:flutter/material.dart';
 
 class ChatPage extends StatefulWidget {
@@ -9,19 +10,16 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
+  final data = ChatData();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        children: [
-          CustomCard(),
-          CustomCard(),
-        ],
+      body: ListView.builder(
+        itemCount: data.chatData.length,
+        itemBuilder: (context,index) => CustomCard(chatModel: data.chatData[index])
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {}, 
-        child: Icon(Icons.chat)
-      )
+      floatingActionButton: FloatingActionButton(onPressed: () {}, child: Icon(Icons.chat)),
     );
   }
 }
