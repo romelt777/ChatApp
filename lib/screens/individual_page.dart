@@ -1,6 +1,8 @@
 import 'package:chat_app/model/chat_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+//
+import 'package:flutter/services.dart';
 
 class IndividualPage extends StatefulWidget {
   final ChatModel chatModel;
@@ -14,6 +16,7 @@ class _IndividualPageState extends State<IndividualPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blueGrey,
       //APPBAR
       appBar: AppBar(
         leadingWidth: 70,
@@ -72,6 +75,64 @@ class _IndividualPageState extends State<IndividualPage> {
             },
           ),
         ],
+      ),
+      resizeToAvoidBottomInset: true,
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: Stack(
+          children: [
+            ListView(),
+            //BOTTOM KEYBOARD
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: SafeArea(
+                child: Row(
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width - 55,
+                      child: Card(
+                        margin: EdgeInsets.only(left: 2, right: 2, bottom: 0),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                        child: TextFormField(
+                          textAlignVertical: TextAlignVertical.center,
+                          keyboardType: TextInputType.multiline,
+                          minLines: 1,
+                          maxLines: 5,
+                          showCursor: true,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "Type a message",
+                            prefixIcon: Icon(Icons.emoji_emotions),
+                            contentPadding: EdgeInsets.all(5),
+                            suffixIcon: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                  onPressed: () {}, 
+                                  icon: Icon(Icons.attach_file)
+                                ),
+                                IconButton(
+                                  onPressed: () {}, 
+                                  icon: Icon(Icons.camera_alt)
+                                ),                                
+                              ],
+                            )
+                          ),
+                        ),
+                      ),
+                    ),
+                    CircleAvatar(
+                      backgroundColor: Color(0xFF128C7E),
+                      radius: 25,
+                      child: IconButton(icon: Icon(Icons.mic, color: Colors.white), onPressed: () {}),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
