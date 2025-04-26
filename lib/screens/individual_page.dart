@@ -97,75 +97,74 @@ class _IndividualPageState extends State<IndividualPage> {
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        child: Stack(
-          children: [
-            ListView(),
-            //BOTTOM KEYBOARD
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  SafeArea(
-                    bottom: !_showEmoji,
-                    child: Row(
-                      children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width - 55,
-                          child: Card(
-                            margin: EdgeInsets.only(left: 2, right: 2, bottom: 0),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-                            //TEXT FORM FIELD
-                            child: TextFormField(
-                              controller: _controller,
-                              focusNode: _focusNode,
-                              textAlignVertical: TextAlignVertical.center,
-                              keyboardType: TextInputType.multiline,
-                              minLines: 1,
-                              maxLines: 5,
-                              showCursor: true,
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "Type a message",
-                                //EMOJI BUTTON
-                                prefixIcon: IconButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      //folding keyboard if open.
-                                      _focusNode.unfocus();
-                                      _focusNode.canRequestFocus = false;
-                                      //toggle emoji keyboard
-                                      _showEmoji = !_showEmoji;
-                                    });
-                                  },
-                                  icon: Icon(Icons.emoji_emotions_outlined),
-                                ),
-                                contentPadding: EdgeInsets.all(5),
-                                suffixIcon: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    IconButton(onPressed: () {}, icon: Icon(Icons.attach_file)),
-                                    IconButton(onPressed: () {}, icon: Icon(Icons.camera_alt)),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
+        child: Stack(children: [ListView(), chatControls()]),
+      ),
+    );
+  }
+
+  //BOTTOM KEYBOARD
+  Widget chatControls() {
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          SafeArea(
+            bottom: !_showEmoji,
+            child: Row(
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width - 55,
+                  child: Card(
+                    margin: EdgeInsets.only(left: 2, right: 2, bottom: 0),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                    //TEXT FORM FIELD
+                    child: TextFormField(
+                      controller: _controller,
+                      focusNode: _focusNode,
+                      textAlignVertical: TextAlignVertical.center,
+                      keyboardType: TextInputType.multiline,
+                      minLines: 1,
+                      maxLines: 5,
+                      showCursor: true,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Type a message",
+                        //EMOJI BUTTON
+                        prefixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              //folding keyboard if open.
+                              _focusNode.unfocus();
+                              _focusNode.canRequestFocus = false;
+                              //toggle emoji keyboard
+                              _showEmoji = !_showEmoji;
+                            });
+                          },
+                          icon: Icon(Icons.emoji_emotions_outlined),
                         ),
-                        CircleAvatar(
-                          backgroundColor: Color(0xFF128C7E),
-                          radius: 25,
-                          child: IconButton(icon: Icon(Icons.mic, color: Colors.white), onPressed: () {}),
+                        contentPadding: EdgeInsets.all(5),
+                        suffixIcon: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(onPressed: () {}, icon: Icon(Icons.attach_file)),
+                            IconButton(onPressed: () {}, icon: Icon(Icons.camera_alt)),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
-                  _showEmoji ? emojiSelect(context) : Container(),
-                ],
-              ),
+                ),
+                CircleAvatar(
+                  backgroundColor: Color(0xFF128C7E),
+                  radius: 25,
+                  child: IconButton(icon: Icon(Icons.mic, color: Colors.white), onPressed: () {}),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+          _showEmoji ? emojiSelect(context) : Container(),
+        ],
       ),
     );
   }
