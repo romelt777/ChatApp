@@ -1,6 +1,10 @@
 import 'package:camera/camera.dart';
+import 'package:chat_app/screens/camera_view.dart';
+import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
 
 //late = variable will be initialized before it is used.
 late List<CameraDescription> cameras;
@@ -21,6 +25,12 @@ class _CameraScreenState extends State<CameraScreen> {
     super.initState();
     _cameraController = CameraController(cameras[0], ResolutionPreset.high);
     cameraValue = _cameraController.initialize();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _cameraController.dispose();
   }
 
   @override
@@ -51,11 +61,10 @@ class _CameraScreenState extends State<CameraScreen> {
                     children: [
                       IconButton(onPressed: () {}, icon: Icon(Icons.flash_off, color: Colors.white, size: 28)),
                       InkWell(
-                        onTap: () {},
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.panorama_fish_eye, color: Colors.white, size: 70),
-                        ),
+                        onTap: () {
+                          takePhoto(context);
+                        },
+                        child: Icon(Icons.panorama_fish_eye, color: Colors.white, size: 70),
                       ),
                       IconButton(onPressed: () {}, icon: Icon(Icons.flip_camera_ios, color: Colors.white, size: 28)),
                     ],
@@ -73,5 +82,17 @@ class _CameraScreenState extends State<CameraScreen> {
         ],
       ),
     );
+  }
+
+  void takePhoto(BuildContext context) async {
+    final path = join((await getTemporaryDirectory()).path, "${DateTime.now()}.png");
+
+    //take picture and save to temp path
+    final XFile picture = await _cameraController.takePicture();
+    // final File imageFile = File(picture.path);
+
+    // copy to permanent path
+
+    Navigator.push(context, MaterialPageRoute(builder: (builder) => CameraView(path: picture.path)));
   }
 }

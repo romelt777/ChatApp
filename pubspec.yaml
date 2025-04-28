@@ -12,6 +12,8 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg: ^2.1.0
+  path_provider: ^2.1.5
+  path:
 
 dev_dependencies:
   flutter_test:
