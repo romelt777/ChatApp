@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:camera/camera.dart';
 import 'package:chat_app/screens/camera_view.dart';
 import 'package:chat_app/screens/video_view.dart';
@@ -22,10 +24,14 @@ class _CameraScreenState extends State<CameraScreen> {
   late Future<void> cameraValue;
   bool _isRecording = false;
   String videoPath = "";
+  bool _flash = false;
+  bool _cameraFront = true;
+  double transform = 0;
 
   @override
   void initState() {
     super.initState();
+    //cameras[0] is the first camera
     _cameraController = CameraController(cameras[0], ResolutionPreset.high);
     cameraValue = _cameraController.initialize();
   }
@@ -61,8 +67,21 @@ class _CameraScreenState extends State<CameraScreen> {
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    //BUTTOMS
                     children: [
-                      IconButton(onPressed: () {}, icon: Icon(Icons.flash_off, color: Colors.white, size: 28)),
+                      //FLASH BUTTON
+                      IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _flash = !_flash;
+                          });
+                          _flash
+                              ? _cameraController.setFlashMode(FlashMode.torch)
+                              : _cameraController.setFlashMode(FlashMode.off);
+                        },
+                        icon: Icon(_flash ? Icons.flash_on : Icons.flash_off, color: Colors.white, size: 28),
+                      ),
+                      //CAMERA BUTTON
                       GestureDetector(
                         onLongPress: () async {
                           takeVideo();
@@ -80,7 +99,24 @@ class _CameraScreenState extends State<CameraScreen> {
                                 ? Icon(Icons.radio_button_on, color: Colors.red, size: 80)
                                 : Icon(Icons.panorama_fish_eye, color: Colors.white, size: 70),
                       ),
-                      IconButton(onPressed: () {}, icon: Icon(Icons.flip_camera_ios, color: Colors.white, size: 28)),
+                      //SWITCH CAMERA BUTTON
+                      IconButton(
+                        onPressed: () async {
+                          setState(() {
+                            _cameraFront = !_cameraFront;
+                            transform = transform + pi;
+                          });
+                          //check which camera is on
+                          int cameraPosition = _cameraFront ? 0 : 1;
+                          _cameraController = CameraController(cameras[cameraPosition], ResolutionPreset.high);
+                          cameraValue = _cameraController.initialize();
+                        },
+                        //transform to rotate/flip camera icon
+                        icon: Transform.rotate(
+                          angle: transform,
+                          child: Icon(Icons.flip_camera_ios, color: Colors.white, size: 28),
+                        ),
+                      ),
                     ],
                   ),
                   SizedBox(height: 4),
