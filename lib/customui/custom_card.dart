@@ -12,9 +12,7 @@ class CustomCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(
-          builder: (context) => IndividualPage(chatModel: chatModel,),
-        ));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => IndividualPage(chatModel: chatModel)));
       },
       child: Column(
         children: [
@@ -23,8 +21,7 @@ class CustomCard extends StatelessWidget {
               radius: 30,
               backgroundColor: Colors.blueGrey,
               child: SvgPicture.asset(
-                chatModel.isGroup?
-                "assets/groups.svg" : "assets/person.svg",
+                chatModel.isGroup ?? false ? "assets/groups.svg" : "assets/person.svg",
                 colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
                 height: 38,
                 width: 37,
@@ -32,9 +29,13 @@ class CustomCard extends StatelessWidget {
             ),
             title: Text(chatModel.name, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             subtitle: Row(
-              children: [Icon(Icons.done_all), SizedBox(width: 3), Text(chatModel.currentMessage, style: TextStyle(fontSize: 13))],
+              children: [
+                Icon(Icons.done_all),
+                SizedBox(width: 3),
+                Text(chatModel.currentMessage ?? "No Message Available", style: TextStyle(fontSize: 13)),
+              ],
             ),
-            trailing: Text(chatModel.time),
+            trailing: Text(chatModel.time ?? "No Time Available"),
           ),
           Padding(
             padding: const EdgeInsets.only(right: 20, left: 80),

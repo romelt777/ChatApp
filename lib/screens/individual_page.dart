@@ -50,7 +50,8 @@ class _IndividualPageState extends State<IndividualPage> {
                 radius: 20,
                 backgroundColor: Colors.blueGrey,
                 child: SvgPicture.asset(
-                  widget.chatModel.isGroup ? "assets/groups.svg" : "assets/person.svg",
+                  //if null, will become false
+                  widget.chatModel.isGroup ?? false ? "assets/groups.svg" : "assets/person.svg",
                   colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
                   height: 38,
                   width: 37,
