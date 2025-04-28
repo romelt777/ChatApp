@@ -1,7 +1,15 @@
+import 'package:camera/camera.dart';
+import 'package:chat_app/screens/camera_screen.dart';
 import 'package:chat_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+Future<void> main() async {
+  //make sure flutter is finished setting up
+  WidgetsFlutterBinding.ensureInitialized();
+
+  //scans device for cameras, wait until finished finding cameras
+  cameras = await availableCameras();
+
   runApp(const MainApp());
 }
 
@@ -15,20 +23,11 @@ class MainApp extends StatelessWidget {
         fontFamily: "OpenSans",
         primaryColor: const Color(0xFF075E54),
         //appBar theme
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFF075E54),
-          foregroundColor: Colors.white
-        ),
-        tabBarTheme: const TabBarTheme(
-          labelColor: Colors.white,
-          unselectedLabelColor: Colors.white70,
-        ),
-        colorScheme: ColorScheme.fromSwatch().copyWith(
-          secondary: const Color(0xFF128C7E),
-        ),
+        appBarTheme: const AppBarTheme(backgroundColor: Color(0xFF075E54), foregroundColor: Colors.white),
+        tabBarTheme: const TabBarTheme(labelColor: Colors.white, unselectedLabelColor: Colors.white70),
+        colorScheme: ColorScheme.fromSwatch().copyWith(secondary: const Color(0xFF128C7E)),
       ),
       home: HomeScreen(),
-  
     );
   }
 }
