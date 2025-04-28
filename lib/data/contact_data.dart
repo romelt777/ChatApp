@@ -34,5 +34,12 @@ class ContactData {
       time: "9:40",
       currentMessage: "Hi Buddy",
     ),
+    ChatModel(name: "Collins", status: "Raect developer.."),
+    ChatModel(name: "Kishor", status: "Full Stack Web"),
+    ChatModel(name: "Testing1", status: "Example work"),
+    ChatModel(name: "Testing2", status: "Sharing is caring"),
+    ChatModel(name: "Divyanshu", status: "....."),
+    ChatModel(name: "Helper", status: "Love you Mom Dad"),
+    ChatModel(name: "Tester", status: "I find the bugs"),
   ];
 }
