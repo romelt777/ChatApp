@@ -1,5 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:chat_app/screens/camera_view.dart';
+import 'package:chat_app/screens/video_view.dart';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,8 @@ class CameraScreen extends StatefulWidget {
 class _CameraScreenState extends State<CameraScreen> {
   late CameraController _cameraController;
   late Future<void> cameraValue;
+  bool _isRecording = false;
+  String videoPath = "";
 
   @override
   void initState() {
@@ -60,11 +63,22 @@ class _CameraScreenState extends State<CameraScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       IconButton(onPressed: () {}, icon: Icon(Icons.flash_off, color: Colors.white, size: 28)),
-                      InkWell(
-                        onTap: () {
-                          takePhoto(context);
+                      GestureDetector(
+                        onLongPress: () async {
+                          takeVideo();
                         },
-                        child: Icon(Icons.panorama_fish_eye, color: Colors.white, size: 70),
+                        onLongPressUp: () {
+                          stopVideo(context);
+                        },
+                        onTap: () {
+                          if (!_isRecording) {
+                            takePhoto(context);
+                          }
+                        },
+                        child:
+                            _isRecording
+                                ? Icon(Icons.radio_button_on, color: Colors.red, size: 80)
+                                : Icon(Icons.panorama_fish_eye, color: Colors.white, size: 70),
                       ),
                       IconButton(onPressed: () {}, icon: Icon(Icons.flip_camera_ios, color: Colors.white, size: 28)),
                     ],
@@ -93,6 +107,30 @@ class _CameraScreenState extends State<CameraScreen> {
 
     // copy to permanent path
 
+    //sending to new screen
     Navigator.push(context, MaterialPageRoute(builder: (builder) => CameraView(path: picture.path)));
+  }
+
+  void takeVideo() async {
+    //create path
+    final path = join((await getTemporaryDirectory()).path, "${DateTime.now()}.mp4");
+
+    await _cameraController.startVideoRecording();
+
+    setState(() {
+      _isRecording = true;
+      videoPath = path;
+    });
+  }
+
+  void stopVideo(BuildContext context) async {
+    final XFile video = await _cameraController.stopVideoRecording();
+    setState(() {
+      videoPath = video.path;
+      _isRecording = false;
+    });
+
+    //sending to new screen
+    Navigator.push(context, MaterialPageRoute(builder: (builder) => VideoView(path: videoPath)));
   }
 }

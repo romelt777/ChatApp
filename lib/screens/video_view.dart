@@ -1,15 +1,17 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
 
-class CameraView extends StatefulWidget {
+class VideoView extends StatefulWidget {
   final String path;
-  const CameraView({super.key, required this.path});
+  const VideoView({super.key, required this.path});
 
   @override
-  State<CameraView> createState() => _CameraViewState();
+  State<VideoView> createState() => _VideoViewState();
 }
 
-class _CameraViewState extends State<CameraView> {
+class _VideoViewState extends State<VideoView> {
+  late VideoPlayerController _controller;
   bool _keyboardOpened = false;
   FocusNode _focusNode = FocusNode();
 
@@ -17,6 +19,10 @@ class _CameraViewState extends State<CameraView> {
   void initState() {
     super.initState();
     _focusNode.addListener(_onFocusChange);
+    _controller = VideoPlayerController.file(File(widget.path))
+      ..initialize().then((_) {
+        setState(() {});
+      });
   }
 
   @override
@@ -56,8 +62,12 @@ class _CameraViewState extends State<CameraView> {
             SizedBox(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height - 250,
-              child: Image.file(File(widget.path), fit: BoxFit.cover),
-            ),
+              child:
+                  //check if initialized
+                  _controller.value.isInitialized
+                      ? AspectRatio(aspectRatio: _controller.value.aspectRatio, child: VideoPlayer(_controller))
+                      : Container(),
+            ), //CAPTION CONTROLS
             Positioned(
               bottom: _keyboardOpened ? 0 : 70,
               child: Container(
@@ -81,6 +91,25 @@ class _CameraViewState extends State<CameraView> {
                       backgroundColor: Colors.teal[700],
                       child: Icon(Icons.check, color: Colors.white, size: 27),
                     ),
+                  ),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: InkWell(
+                onTap: () {
+                  setState(() {
+                    _controller.value.isPlaying ? _controller.pause() : _controller.play();
+                  });
+                },
+                child: CircleAvatar(
+                  radius: 33,
+                  backgroundColor: Colors.black38,
+                  child: Icon(
+                    _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+                    color: Colors.white,
+                    size: 50,
                   ),
                 ),
               ),
