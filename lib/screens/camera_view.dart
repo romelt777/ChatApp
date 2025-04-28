@@ -1,10 +1,38 @@
 import 'dart:io';
 
+import 'package:chat_app/pages/camera_page.dart';
 import 'package:flutter/material.dart';
 
-class CameraView extends StatelessWidget {
-  const CameraView({super.key, required this.path});
+class CameraView extends StatefulWidget {
   final String path;
+  const CameraView({super.key, required this.path});
+
+  @override
+  State<CameraView> createState() => _CameraViewState();
+}
+
+class _CameraViewState extends State<CameraView> {
+  bool _keyboardOpened = false;
+  FocusNode _focusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode.addListener(_onFocusChange);
+  }
+
+  @override
+  void dispose() {
+    _focusNode.removeListener(_onFocusChange);
+    _focusNode.dispose();
+    super.dispose();
+  }
+
+  void _onFocusChange() {
+    setState(() {
+      _keyboardOpened = _focusNode.hasFocus;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,16 +57,17 @@ class CameraView extends StatelessWidget {
             Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height - 250,
-              child: Image.file(File(path), fit: BoxFit.cover),
+              child: Image.file(File(widget.path), fit: BoxFit.cover),
             ),
             Positioned(
-              bottom: 80,
+              bottom: _keyboardOpened ? 0 : 80,
               child: Container(
                 color: Colors.black38,
                 width: MediaQuery.of(context).size.width,
                 padding: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
                 //FORM FOR ADDING CAPTIONS
                 child: TextFormField(
+                  focusNode: _focusNode,
                   style: TextStyle(color: Colors.white, fontSize: 17),
                   maxLines: 6,
                   minLines: 1,
