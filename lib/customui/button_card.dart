@@ -1,6 +1,4 @@
-import 'package:chat_app/model/chat_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class ButtonCard extends StatelessWidget {
   final String name;
