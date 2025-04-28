@@ -1,6 +1,4 @@
 import 'dart:io';
-
-import 'package:chat_app/pages/camera_page.dart';
 import 'package:flutter/material.dart';
 
 class CameraView extends StatefulWidget {
@@ -49,18 +47,18 @@ class _CameraViewState extends State<CameraView> {
         ],
       ),
       //BODY
-      body: Container(
+      body: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: Stack(
           children: [
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height - 250,
               child: Image.file(File(widget.path), fit: BoxFit.cover),
             ),
             Positioned(
-              bottom: _keyboardOpened ? 0 : 80,
+              bottom: _keyboardOpened ? 0 : 70,
               child: Container(
                 color: Colors.black38,
                 width: MediaQuery.of(context).size.width,

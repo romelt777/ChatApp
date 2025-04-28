@@ -95,7 +95,7 @@ class _IndividualPageState extends State<IndividualPage> {
         ],
       ),
       resizeToAvoidBottomInset: true,
-      body: Container(
+      body: SizedBox(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: Stack(children: [ListView(), chatControls()]),
@@ -114,7 +114,7 @@ class _IndividualPageState extends State<IndividualPage> {
             bottom: !_showEmoji,
             child: Row(
               children: [
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width - 55,
                   child: Card(
                     margin: EdgeInsets.only(left: 2, right: 2, bottom: 0),
@@ -180,7 +180,7 @@ class _IndividualPageState extends State<IndividualPage> {
   }
 
   Widget bottomSheet() {
-    return Container(
+    return SizedBox(
       height: 278,
       width: MediaQuery.of(context).size.width,
       child: Card(
