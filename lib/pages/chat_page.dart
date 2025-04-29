@@ -1,6 +1,6 @@
 import 'package:chat_app/customui/custom_card.dart';
 import 'package:chat_app/data/chat_data.dart';
-import 'package:chat_app/screens/select_contact.dart';
+import 'package:chat_app/screens/chats/select_contact.dart';
 import 'package:flutter/material.dart';
 
 class ChatPage extends StatefulWidget {
