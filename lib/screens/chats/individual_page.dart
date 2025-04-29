@@ -3,6 +3,7 @@ import 'package:chat_app/widgets/chats/app_bar_chats.dart';
 import 'package:chat_app/widgets/chats/chat_controls.dart';
 import 'package:chat_app/widgets/chats/message_list.dart';
 import 'package:flutter/material.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class IndividualPage extends StatefulWidget {
   final ChatModel chatModel;
@@ -16,10 +17,12 @@ class _IndividualPageState extends State<IndividualPage> {
   bool _showEmoji = false; // to show emoji keyboard
   FocusNode _focusNode = FocusNode(); //for show/hide keyboard
   TextEditingController _controller = TextEditingController();
+  late IO.Socket socket; //io socket
 
   @override
   void initState() {
     super.initState();
+    _connect();
     _setupFocusNodeListener();
   }
 
@@ -47,6 +50,17 @@ class _IndividualPageState extends State<IndividualPage> {
       _focusNode.canRequestFocus = false;
       _showEmoji = !_showEmoji;
     });
+  }
+
+  void _connect() {
+    socket = IO.io("http://192.168.2.218:5000", <String, dynamic>{
+      "transports": ["websocket"],
+      "autoConnect": false,
+    });
+    socket.connect();
+    socket.emit("/test", "Hello Rom");
+    socket.onConnect((data) => print("Connected from flutter"));
+    print(socket.connected);
   }
 
   @override
