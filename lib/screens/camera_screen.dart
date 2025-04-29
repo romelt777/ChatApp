@@ -1,10 +1,7 @@
 import 'dart:math';
-
 import 'package:camera/camera.dart';
 import 'package:chat_app/screens/camera_view.dart';
 import 'package:chat_app/screens/video_view.dart';
-import 'dart:io';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -135,7 +132,7 @@ class _CameraScreenState extends State<CameraScreen> {
   }
 
   void takePhoto(BuildContext context) async {
-    final path = join((await getTemporaryDirectory()).path, "${DateTime.now()}.png");
+    // final path = join((await getTemporaryDirectory()).path, "${DateTime.now()}.png");
 
     //take picture and save to temp path
     final XFile picture = await _cameraController.takePicture();
