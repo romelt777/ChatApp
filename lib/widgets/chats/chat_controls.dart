@@ -1,3 +1,5 @@
+import 'package:chat_app/model/chat_model.dart';
+import 'package:chat_app/utils/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/widgets/chats/attachment_bottom_sheet.dart';
 import 'package:chat_app/widgets/chats/emoji_keyboard.dart';
@@ -9,6 +11,8 @@ class ChatControls extends StatelessWidget {
   final VoidCallback onEmojiToggle;
   final bool showSendButton;
   final Function(String) sendButtonToggle;
+  final Function(String, int?, int) sendMessage;
+  final int targetId;
 
   const ChatControls({
     super.key,
@@ -18,6 +22,8 @@ class ChatControls extends StatelessWidget {
     required this.onEmojiToggle,
     required this.showSendButton,
     required this.sendButtonToggle,
+    required this.sendMessage,
+    required this.targetId,
   });
 
   @override
@@ -32,7 +38,7 @@ class ChatControls extends StatelessWidget {
   }
 
   Widget _buildInputRow(BuildContext context) {
-    return SafeArea(bottom: !showEmoji, child: Row(children: [_buildTextField(context), _buildMicButton()]));
+    return SafeArea(bottom: !showEmoji, child: Row(children: [_buildTextField(context), _buildMultiButton()]));
   }
 
   Widget _buildTextField(BuildContext context) {
@@ -81,11 +87,19 @@ class ChatControls extends StatelessWidget {
     );
   }
 
-  Widget _buildMicButton() {
+  Widget _buildMultiButton() {
     return CircleAvatar(
       backgroundColor: const Color(0xFF128C7E),
       radius: 25,
-      child: IconButton(icon: Icon(showSendButton ? Icons.send : Icons.mic, color: Colors.white), onPressed: () {}),
+      child: IconButton(
+        icon: Icon(showSendButton ? Icons.send : Icons.mic, color: Colors.white),
+        onPressed: () {
+          if (showSendButton) {
+            sendMessage(controller.text, currentUser?.id, targetId);
+            controller.clear();
+          }
+        },
+      ),
     );
   }
 }

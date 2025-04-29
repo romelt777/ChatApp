@@ -1,4 +1,5 @@
 import 'package:chat_app/model/chat_model.dart';
+import 'package:chat_app/utils/globals.dart';
 import 'package:chat_app/widgets/chats/app_bar_chats.dart';
 import 'package:chat_app/widgets/chats/chat_controls.dart';
 import 'package:chat_app/widgets/chats/message_list.dart';
@@ -67,9 +68,13 @@ class _IndividualPageState extends State<IndividualPage> {
     });
 
     socket.connect();
-    socket.emit("/test", "Hello Rom");
+    socket.emit("signin", currentUser?.id);
     socket.onConnect((data) => print("Connected from flutter"));
     print(socket.connected);
+  }
+
+  void sendMessage(String message, int? sourceId, int targetId) {
+    socket.emit("message", {"message": message, "sourceId": sourceId, "targetId": targetId});
   }
 
   @override
@@ -100,6 +105,8 @@ class _IndividualPageState extends State<IndividualPage> {
                   onEmojiToggle: _toggleEmojiKeyboard,
                   showSendButton: _showSendButton,
                   sendButtonToggle: _updateSendButtonState,
+                  sendMessage: sendMessage,
+                  targetId: widget.chatModel.id,
                 ),
               ],
             ),

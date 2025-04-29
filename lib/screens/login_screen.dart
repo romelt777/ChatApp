@@ -2,6 +2,7 @@ import 'package:chat_app/customui/button_card.dart';
 import 'package:chat_app/data/chat_no_groups_data.dart';
 import 'package:chat_app/model/chat_model.dart';
 import 'package:chat_app/screens/cameras/home_screen.dart';
+import 'package:chat_app/utils/globals.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -12,7 +13,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  late ChatModel sourceChat; //to hold user
   var data = ChatNoGroupsData();
 
   @override
@@ -24,12 +24,9 @@ class _LoginScreenState extends State<LoginScreen> {
             (context, index) => InkWell(
               onTap: () {
                 setState(() {
-                  sourceChat = data.chatNoGroups.removeAt(index);
+                  currentUser = data.chatNoGroups.removeAt(index);
                 });
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (builder) => HomeScreen(sourceChat: sourceChat)),
-                );
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (builder) => HomeScreen()));
               },
               child: ButtonCard(icon: Icons.person, name: data.chatNoGroups[index].name),
             ),

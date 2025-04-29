@@ -5,8 +5,7 @@ import 'package:chat_app/screens/chats/select_contact.dart';
 import 'package:flutter/material.dart';
 
 class ChatPage extends StatefulWidget {
-  final ChatModel sourceChat;
-  const ChatPage({super.key, required this.sourceChat});
+  const ChatPage({super.key});
 
   @override
   State<ChatPage> createState() => _ChatPageState();
