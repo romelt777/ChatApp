@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:camera/camera.dart';
-import 'package:chat_app/screens/camera_view.dart';
-import 'package:chat_app/screens/video_view.dart';
+import 'package:chat_app/screens/cameras/camera_view.dart';
+import 'package:chat_app/screens/cameras/video_view.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';

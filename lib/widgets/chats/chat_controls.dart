@@ -7,6 +7,8 @@ class ChatControls extends StatelessWidget {
   final FocusNode focusNode;
   final bool showEmoji;
   final VoidCallback onEmojiToggle;
+  final bool showSendButton;
+  final Function(String) sendButtonToggle;
 
   const ChatControls({
     super.key,
@@ -14,6 +16,8 @@ class ChatControls extends StatelessWidget {
     required this.focusNode,
     required this.showEmoji,
     required this.onEmojiToggle,
+    required this.showSendButton,
+    required this.sendButtonToggle,
   });
 
   @override
@@ -38,6 +42,7 @@ class ChatControls extends StatelessWidget {
         margin: const EdgeInsets.only(left: 2, right: 2, bottom: 0),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
         child: TextFormField(
+          onChanged: sendButtonToggle,
           controller: controller,
           focusNode: focusNode,
           textAlignVertical: TextAlignVertical.center,
@@ -80,7 +85,7 @@ class ChatControls extends StatelessWidget {
     return CircleAvatar(
       backgroundColor: const Color(0xFF128C7E),
       radius: 25,
-      child: IconButton(icon: const Icon(Icons.mic, color: Colors.white), onPressed: () {}),
+      child: IconButton(icon: Icon(showSendButton ? Icons.send : Icons.mic, color: Colors.white), onPressed: () {}),
     );
   }
 }

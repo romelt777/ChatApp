@@ -18,6 +18,7 @@ class _IndividualPageState extends State<IndividualPage> {
   FocusNode _focusNode = FocusNode(); //for show/hide keyboard
   TextEditingController _controller = TextEditingController();
   late IO.Socket socket; //io socket
+  bool _showSendButton = false;
 
   @override
   void initState() {
@@ -49,6 +50,12 @@ class _IndividualPageState extends State<IndividualPage> {
       _focusNode.unfocus();
       _focusNode.canRequestFocus = false;
       _showEmoji = !_showEmoji;
+    });
+  }
+
+  void _updateSendButtonState(String value) {
+    setState(() {
+      _showSendButton = value.trim().isNotEmpty;
     });
   }
 
@@ -91,6 +98,8 @@ class _IndividualPageState extends State<IndividualPage> {
                   focusNode: _focusNode,
                   showEmoji: _showEmoji,
                   onEmojiToggle: _toggleEmojiKeyboard,
+                  showSendButton: _showSendButton,
+                  sendButtonToggle: _updateSendButtonState,
                 ),
               ],
             ),
