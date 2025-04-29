@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:chat_app/screens/camera_screen.dart';
 import 'package:chat_app/screens/home_screen.dart';
+import 'package:chat_app/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async {
@@ -27,7 +28,7 @@ class MainApp extends StatelessWidget {
         tabBarTheme: const TabBarTheme(labelColor: Colors.white, unselectedLabelColor: Colors.white70),
         colorScheme: ColorScheme.fromSwatch().copyWith(secondary: const Color(0xFF128C7E)),
       ),
-      home: HomeScreen(),
+      home: LoginScreen(),
     );
   }
 }

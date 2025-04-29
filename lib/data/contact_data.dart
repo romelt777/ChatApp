@@ -3,6 +3,7 @@ import 'package:chat_app/model/chat_model.dart';
 class ContactData {
   final List<ChatModel> contactData = [
     ChatModel(
+      id: 201,
       name: "Rom",
       status: "A full stack developer",
       icon: "person.svg",
@@ -11,6 +12,7 @@ class ContactData {
       currentMessage: "Hi World",
     ),
     ChatModel(
+      id: 202,
       name: "Ralph",
       status: "Flutter developer",
       icon: "person.svg",
@@ -19,6 +21,7 @@ class ContactData {
       currentMessage: "Hi Rom",
     ),
     ChatModel(
+      id: 203,
       name: "Tham",
       status: "Developer",
       icon: "person.svg",
@@ -27,6 +30,7 @@ class ContactData {
       currentMessage: "Hi Ralph",
     ),
     ChatModel(
+      id: 204,
       name: "Bob",
       status: "App developer",
       icon: "group.svg",
@@ -34,20 +38,20 @@ class ContactData {
       time: "9:40",
       currentMessage: "Hi Buddy",
     ),
-    ChatModel(name: "Collins", status: "Raect developer.."),
-    ChatModel(name: "Kishor", status: "Full Stack Web"),
-    ChatModel(name: "Testing1", status: "Example work"),
-    ChatModel(name: "Testing2", status: "Sharing is caring"),
-    ChatModel(name: "Divyanshu", status: "....."),
-    ChatModel(name: "Helper", status: "Love you Mom Dad"),
-    ChatModel(name: "Tester", status: "I find the bugs"),
-    ChatModel(name: "Heidi", status: "Work hard, nap hard"),
-    ChatModel(name: "Ivan", status: "Just chilling 😎"),
-    ChatModel(name: "Judy", status: "Reading the docs again..."),
-    ChatModel(name: "Mallory", status: "Building something cool"),
-    ChatModel(name: "Nina", status: "Always learning"),
-    ChatModel(name: "Oscar", status: "👀"),
-    ChatModel(name: "Peggy", status: "Making it work"),
-    ChatModel(name: "Sybil", status: "Stay curious"),
+    ChatModel(id: 205, name: "Collins", status: "React developer.."),
+    ChatModel(id: 206, name: "Kishor", status: "Full Stack Web"),
+    ChatModel(id: 207, name: "Testing1", status: "Example work"),
+    ChatModel(id: 208, name: "Testing2", status: "Sharing is caring"),
+    ChatModel(id: 209, name: "Divyanshu", status: "....."),
+    ChatModel(id: 210, name: "Helper", status: "Love you Mom Dad"),
+    ChatModel(id: 211, name: "Tester", status: "I find the bugs"),
+    ChatModel(id: 212, name: "Heidi", status: "Work hard, nap hard"),
+    ChatModel(id: 213, name: "Ivan", status: "Just chilling 😎"),
+    ChatModel(id: 214, name: "Judy", status: "Reading the docs again..."),
+    ChatModel(id: 215, name: "Mallory", status: "Building something cool"),
+    ChatModel(id: 216, name: "Nina", status: "Always learning"),
+    ChatModel(id: 217, name: "Oscar", status: "👀"),
+    ChatModel(id: 218, name: "Peggy", status: "Making it work"),
+    ChatModel(id: 219, name: "Sybil", status: "Stay curious"),
   ];
 }
