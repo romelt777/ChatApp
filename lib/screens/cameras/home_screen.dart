@@ -1,5 +1,4 @@
 import 'package:chat_app/data/chat_no_groups_data.dart';
-import 'package:chat_app/model/chat_model.dart';
 import 'package:chat_app/pages/camera_page.dart';
 import 'package:chat_app/pages/chat_page.dart';
 import 'package:flutter/material.dart';

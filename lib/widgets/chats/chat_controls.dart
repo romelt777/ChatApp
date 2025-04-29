@@ -1,4 +1,3 @@
-import 'package:chat_app/model/chat_model.dart';
 import 'package:chat_app/utils/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/widgets/chats/attachment_bottom_sheet.dart';

@@ -1,6 +1,5 @@
 import 'package:chat_app/customui/button_card.dart';
 import 'package:chat_app/data/chat_no_groups_data.dart';
-import 'package:chat_app/model/chat_model.dart';
 import 'package:chat_app/screens/cameras/home_screen.dart';
 import 'package:chat_app/utils/globals.dart';
 import 'package:flutter/material.dart';
