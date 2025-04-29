@@ -144,7 +144,9 @@ class _CameraScreenState extends State<CameraScreen> {
     // copy to permanent path
 
     //sending to new screen
-    Navigator.push(context, MaterialPageRoute(builder: (builder) => CameraView(path: picture.path)));
+    if (context.mounted) {
+      Navigator.push(context, MaterialPageRoute(builder: (builder) => CameraView(path: picture.path)));
+    }
   }
 
   void takeVideo() async {
@@ -167,6 +169,8 @@ class _CameraScreenState extends State<CameraScreen> {
     });
 
     //sending to new screen
-    Navigator.push(context, MaterialPageRoute(builder: (builder) => VideoView(path: videoPath)));
+    if (context.mounted) {
+      Navigator.push(context, MaterialPageRoute(builder: (builder) => VideoView(path: videoPath)));
+    }
   }
 }
