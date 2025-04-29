@@ -51,27 +51,36 @@ class _IndividualPageState extends State<IndividualPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.blueGrey,
-      //APPBAR
-      appBar: AppBarChat(chatModel: widget.chatModel),
-      resizeToAvoidBottomInset: true,
-      //BODY
-      body: SizedBox(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: Stack(
-          children: [
-            MessageList(),
-            ChatControls(
-              controller: _controller,
-              focusNode: _focusNode,
-              showEmoji: _showEmoji,
-              onEmojiToggle: _toggleEmojiKeyboard,
-            ),
-          ],
+    return Stack(
+      children: [
+        Image.asset(
+          "assets/whatsAppBackground.png",
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
         ),
-      ),
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          //APPBAR
+          appBar: AppBarChat(chatModel: widget.chatModel),
+          resizeToAvoidBottomInset: true,
+          //BODY
+          body: SizedBox(
+            height: MediaQuery.of(context).size.height - 175,
+            width: MediaQuery.of(context).size.width,
+            child: Stack(
+              children: [
+                MessageList(),
+                ChatControls(
+                  controller: _controller,
+                  focusNode: _focusNode,
+                  showEmoji: _showEmoji,
+                  onEmojiToggle: _toggleEmojiKeyboard,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

@@ -41,5 +41,13 @@ class ContactData {
     ChatModel(name: "Divyanshu", status: "....."),
     ChatModel(name: "Helper", status: "Love you Mom Dad"),
     ChatModel(name: "Tester", status: "I find the bugs"),
+    ChatModel(name: "Heidi", status: "Work hard, nap hard"),
+    ChatModel(name: "Ivan", status: "Just chilling 😎"),
+    ChatModel(name: "Judy", status: "Reading the docs again..."),
+    ChatModel(name: "Mallory", status: "Building something cool"),
+    ChatModel(name: "Nina", status: "Always learning"),
+    ChatModel(name: "Oscar", status: "👀"),
+    ChatModel(name: "Peggy", status: "Making it work"),
+    ChatModel(name: "Sybil", status: "Stay curious"),
   ];
 }
