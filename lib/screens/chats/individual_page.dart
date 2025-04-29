@@ -53,10 +53,12 @@ class _IndividualPageState extends State<IndividualPage> {
   }
 
   void _connect() {
-    socket = IO.io("http://192.168.2.218:5000", <String, dynamic>{
+    //using localHost
+    socket = IO.io("http://10.0.2.2:5000", <String, dynamic>{
       "transports": ["websocket"],
       "autoConnect": false,
     });
+
     socket.connect();
     socket.emit("/test", "Hello Rom");
     socket.onConnect((data) => print("Connected from flutter"));
