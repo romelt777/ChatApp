@@ -69,6 +69,12 @@ class _IndividualPageState extends State<IndividualPage> {
     });
   }
 
+  void _changeSendMicButton() {
+    setState(() {
+      _showSendButton = !_showSendButton;
+    });
+  }
+
   void _updateSendButtonState(String value) {
     setState(() {
       _showSendButton = value.trim().isNotEmpty;
@@ -119,21 +125,24 @@ class _IndividualPageState extends State<IndividualPage> {
           body: SizedBox(
             height: MediaQuery.of(context).size.height - 175,
             width: MediaQuery.of(context).size.width,
-            child: Stack(
-              children: [
-                MessageList(scrollController: scrollController),
-                ChatControls(
-                  controller: _controller,
-                  focusNode: _focusNode,
-                  showEmoji: _showEmoji,
-                  onEmojiToggle: _toggleEmojiKeyboard,
-                  showSendButton: _showSendButton,
-                  sendButtonToggle: _updateSendButtonState,
-                  sendMessage: sendMessage,
-                  targetId: widget.chatModel.id,
-                  scrollController: scrollController,
-                ),
-              ],
+            child: PopScope(
+              child: Column(
+                children: [
+                  MessageList(scrollController: scrollController),
+                  ChatControls(
+                    controller: _controller,
+                    focusNode: _focusNode,
+                    showEmoji: _showEmoji,
+                    onEmojiToggle: _toggleEmojiKeyboard,
+                    showSendButton: _showSendButton,
+                    changeSendMicButton: _changeSendMicButton,
+                    sendButtonToggle: _updateSendButtonState,
+                    sendMessage: sendMessage,
+                    targetId: widget.chatModel.id,
+                    scrollController: scrollController,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

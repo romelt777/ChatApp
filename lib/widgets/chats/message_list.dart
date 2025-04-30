@@ -11,8 +11,7 @@ class MessageList extends StatelessWidget {
   Widget build(BuildContext context) {
     var data = MessagesData();
 
-    return SizedBox(
-      height: MediaQuery.of(context).size.height - 250,
+    return Expanded(
       child: ListView.builder(
         controller: scrollController,
         shrinkWrap: true,

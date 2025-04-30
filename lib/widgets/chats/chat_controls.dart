@@ -9,6 +9,7 @@ class ChatControls extends StatelessWidget {
   final bool showEmoji;
   final VoidCallback onEmojiToggle;
   final bool showSendButton;
+  final VoidCallback changeSendMicButton;
   final Function(String) sendButtonToggle;
   final Function(String, int?, int) sendMessage;
   final int targetId;
@@ -21,6 +22,7 @@ class ChatControls extends StatelessWidget {
     required this.showEmoji,
     required this.onEmojiToggle,
     required this.showSendButton,
+    required this.changeSendMicButton,
     required this.sendButtonToggle,
     required this.sendMessage,
     required this.targetId,
@@ -31,9 +33,12 @@ class ChatControls extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.bottomCenter,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [_buildInputRow(context), showEmoji ? EmojiKeyboard(controller: controller) : Container()],
+      child: SizedBox(
+        height: 75,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [_buildInputRow(context), showEmoji ? EmojiKeyboard(controller: controller) : Container()],
+        ),
       ),
     );
   }
@@ -106,6 +111,7 @@ class ChatControls extends StatelessWidget {
                 curve: Curves.easeOut,
               );
             });
+            changeSendMicButton();
           }
         },
       ),
