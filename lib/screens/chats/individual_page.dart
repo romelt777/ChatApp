@@ -21,6 +21,7 @@ class _IndividualPageState extends State<IndividualPage> {
   TextEditingController _controller = TextEditingController();
   late IO.Socket socket; //io socket
   bool _showSendButton = false;
+  // ScrollController
 
   @override
   void initState() {
@@ -34,9 +35,10 @@ class _IndividualPageState extends State<IndividualPage> {
     MessagesData().addListener(_onNewMessage);
   }
 
+  //refresh UI
   void _onNewMessage() {
     if (!mounted) return;
-    setState(() {}); //refresh UI
+    setState(() {});
   }
 
   void _setupFocusNodeListener() {
@@ -54,6 +56,7 @@ class _IndividualPageState extends State<IndividualPage> {
   void dispose() {
     _focusNode.dispose();
     _controller.dispose();
+    MessagesData().removeListener(_onNewMessage);
     super.dispose();
   }
 
