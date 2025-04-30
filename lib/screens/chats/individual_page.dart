@@ -29,6 +29,15 @@ class _IndividualPageState extends State<IndividualPage> {
     _connect();
     _setupFocusNodeListener();
     _setUpMessageListener();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (scrollController.hasClients) {
+        scrollController.animateTo(
+          scrollController.position.maxScrollExtent,
+          duration: Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+        );
+      }
+    });
   }
 
   void _setUpMessageListener() {
@@ -47,6 +56,18 @@ class _IndividualPageState extends State<IndividualPage> {
         setState(() {
           // Hide emoji keyboard when text field gets focus
           _showEmoji = false;
+        });
+        //move message up when keyboard opens
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Future.delayed(Duration(milliseconds: 700), () {
+            if (scrollController.hasClients) {
+              scrollController.animateTo(
+                scrollController.position.maxScrollExtent,
+                duration: Duration(milliseconds: 300),
+                curve: Curves.easeOut,
+              );
+            }
+          });
         });
       }
     });
@@ -96,6 +117,7 @@ class _IndividualPageState extends State<IndividualPage> {
       socket.on("message", (msg) {
         print(msg);
         MessagesData().setMessage("destination", msg["message"], msg["time"]);
+        //Wait until the current frame (build phase) finishes
         WidgetsBinding.instance.addPostFrameCallback((_) {
           scrollController.animateTo(
             scrollController.position.maxScrollExtent,
