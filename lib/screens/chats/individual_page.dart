@@ -1,6 +1,5 @@
 import 'package:chat_app/data/messages_data.dart';
 import 'package:chat_app/model/chat_model.dart';
-import 'package:chat_app/model/message_model.dart';
 import 'package:chat_app/utils/globals.dart';
 import 'package:chat_app/widgets/chats/app_bar_chats.dart';
 import 'package:chat_app/widgets/chats/chat_controls.dart';
