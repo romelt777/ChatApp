@@ -1,4 +1,6 @@
+import 'package:chat_app/data/messages_data.dart';
 import 'package:chat_app/model/chat_model.dart';
+import 'package:chat_app/model/message_model.dart';
 import 'package:chat_app/utils/globals.dart';
 import 'package:chat_app/widgets/chats/app_bar_chats.dart';
 import 'package:chat_app/widgets/chats/chat_controls.dart';
@@ -26,6 +28,16 @@ class _IndividualPageState extends State<IndividualPage> {
     super.initState();
     _connect();
     _setupFocusNodeListener();
+    _setUpMessageListener();
+  }
+
+  void _setUpMessageListener() {
+    MessagesData().addListener(_onNewMessage);
+  }
+
+  void _onNewMessage() {
+    if (!mounted) return;
+    setState(() {}); //refresh UI
   }
 
   void _setupFocusNodeListener() {
@@ -69,11 +81,20 @@ class _IndividualPageState extends State<IndividualPage> {
 
     socket.connect();
     socket.emit("signin", currentUser?.id);
-    socket.onConnect((data) => print("Connected from flutter"));
+    //receiving message
+    socket.onConnect((data) {
+      print("Connected from flutter");
+      socket.on("message", (msg) {
+        print(msg);
+        MessagesData().addMessage("destination", msg["message"]);
+      });
+    });
     print(socket.connected);
   }
 
+  //outgoing message
   void sendMessage(String message, int? sourceId, int targetId) {
+    MessagesData().addMessage("source", message);
     socket.emit("message", {"message": message, "sourceId": sourceId, "targetId": targetId});
   }
 

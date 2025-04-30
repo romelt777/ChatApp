@@ -1,6 +1,6 @@
 import 'package:chat_app/customui/button_card.dart';
 import 'package:chat_app/data/chat_no_groups_data.dart';
-import 'package:chat_app/screens/cameras/home_screen.dart';
+import 'package:chat_app/screens/home_screen.dart';
 import 'package:chat_app/utils/globals.dart';
 import 'package:flutter/material.dart';
 
@@ -22,10 +22,10 @@ class _LoginScreenState extends State<LoginScreen> {
         itemBuilder:
             (context, index) => InkWell(
               onTap: () {
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (builder) => HomeScreen()));
                 setState(() {
                   currentUser = data.chatNoGroups.removeAt(index);
                 });
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (builder) => HomeScreen()));
               },
               child: ButtonCard(icon: Icons.person, name: data.chatNoGroups[index].name),
             ),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class MessageSelf extends StatelessWidget {
-  const MessageSelf({super.key});
+  final String message;
+  const MessageSelf({super.key, required this.message});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class MessageSelf extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 8, right: 60, top: 10, bottom: 25),
-                child: Text("Eh hell nah not working", style: TextStyle(fontSize: 16)),
+                child: Text(message, style: TextStyle(fontSize: 16)),
               ),
               Positioned(
                 bottom: 4,
