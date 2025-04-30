@@ -18,9 +18,9 @@ class MessageList extends StatelessWidget {
         itemCount: data.messages.length,
         itemBuilder: (context, index) {
           if (data.messages[index].type == "source") {
-            return MessageSelf(message: data.messages[index].message);
+            return MessageSelf(message: data.messages[index].message, time: data.messages[index].time);
           } else {
-            return MessageReply(message: data.messages[index].message);
+            return MessageReply(message: data.messages[index].message, time: data.messages[index].time);
           }
         },
       ),

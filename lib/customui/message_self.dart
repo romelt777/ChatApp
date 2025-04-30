@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class MessageSelf extends StatelessWidget {
+  final String time;
   final String message;
-  const MessageSelf({super.key, required this.message});
+  const MessageSelf({super.key, required this.message, required this.time});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class MessageSelf extends StatelessWidget {
                 right: 10,
                 child: Row(
                   children: [
-                    Text("20:07", style: TextStyle(fontSize: 13, color: Colors.grey)),
+                    Text(time, style: TextStyle(fontSize: 13, color: Colors.grey)),
                     SizedBox(width: 5),
                     Icon(Icons.done, size: 20),
                   ],

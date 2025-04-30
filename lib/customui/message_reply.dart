@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class MessageReply extends StatelessWidget {
   final String message;
-  const MessageReply({super.key, required this.message});
+  final String time;
+  const MessageReply({super.key, required this.message, required this.time});
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +22,7 @@ class MessageReply extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 8, right: 60, top: 10, bottom: 25),
                 child: Text(message, style: TextStyle(fontSize: 16)),
               ),
-              Positioned(
-                bottom: 4,
-                right: 10,
-                child: Text("20:07", style: TextStyle(fontSize: 13, color: Colors.grey)),
-              ),
+              Positioned(bottom: 4, right: 10, child: Text(time, style: TextStyle(fontSize: 13, color: Colors.grey))),
             ],
           ),
         ),

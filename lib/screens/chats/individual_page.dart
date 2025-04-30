@@ -95,7 +95,7 @@ class _IndividualPageState extends State<IndividualPage> {
       print("Connected from flutter");
       socket.on("message", (msg) {
         print(msg);
-        MessagesData().addMessage("destination", msg["message"]);
+        MessagesData().setMessage("destination", msg["message"], msg["time"]);
       });
     });
     print(socket.connected);
@@ -103,8 +103,13 @@ class _IndividualPageState extends State<IndividualPage> {
 
   //outgoing message
   void sendMessage(String message, int? sourceId, int targetId) {
-    MessagesData().addMessage("source", message);
-    socket.emit("message", {"message": message, "sourceId": sourceId, "targetId": targetId});
+    MessagesData().setMessage("source", message, DateTime.now().toString().substring(10, 16));
+    socket.emit("message", {
+      "message": message,
+      "sourceId": sourceId,
+      "targetId": targetId,
+      "time": DateTime.now().toString().substring(10, 16),
+    });
   }
 
   @override

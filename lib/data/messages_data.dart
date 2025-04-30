@@ -15,9 +15,9 @@ class MessagesData extends ChangeNotifier {
   final List<MessageModel> messages = [];
 
   //method to add messages
-  void addMessage(String type, String message) {
+  void setMessage(String type, String message, String time) {
     //receiving type and message and setting to messageModel object
-    MessageModel messageModel = MessageModel(type: type, message: message);
+    MessageModel messageModel = MessageModel(type: type, message: message, time: time);
     //adding messageModel object to messages
     messages.add(messageModel);
     notifyListeners();
