@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:chat_app/custom_ui/status/status_others.dart';
 import 'package:chat_app/custom_ui/status/status_self.dart';
 import 'package:chat_app/data/status_data.dart';
@@ -53,6 +51,8 @@ class _StatusPageState extends State<StatusPage> {
                   name: data.statuses[index].name,
                   time: data.statuses[index].time,
                   imageName: data.statuses[index].imageName,
+                  isSeen: data.statuses[index].isSeen,
+                  statusFreq: data.statuses[index].statusFreq,
                 );
               },
             ),
@@ -67,6 +67,8 @@ class _StatusPageState extends State<StatusPage> {
                   name: data.statuses[index + 4].name,
                   time: data.statuses[index + 4].time,
                   imageName: data.statuses[index + 4].imageName,
+                  isSeen: data.statuses[index + 4].isSeen,
+                  statusFreq: data.statuses[index + 4].statusFreq,
                 );
               },
             ),
