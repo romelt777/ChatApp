@@ -21,7 +21,7 @@ class _IndividualPageState extends State<IndividualPage> {
   TextEditingController _controller = TextEditingController();
   late IO.Socket socket; //io socket
   bool _showSendButton = false;
-  // ScrollController
+  ScrollController scrollController = ScrollController();
 
   @override
   void initState() {
@@ -57,6 +57,7 @@ class _IndividualPageState extends State<IndividualPage> {
     _focusNode.dispose();
     _controller.dispose();
     MessagesData().removeListener(_onNewMessage);
+    scrollController.dispose();
     super.dispose();
   }
 
@@ -120,7 +121,7 @@ class _IndividualPageState extends State<IndividualPage> {
             width: MediaQuery.of(context).size.width,
             child: Stack(
               children: [
-                MessageList(),
+                MessageList(scrollController: scrollController),
                 ChatControls(
                   controller: _controller,
                   focusNode: _focusNode,
@@ -130,6 +131,7 @@ class _IndividualPageState extends State<IndividualPage> {
                   sendButtonToggle: _updateSendButtonState,
                   sendMessage: sendMessage,
                   targetId: widget.chatModel.id,
+                  scrollController: scrollController,
                 ),
               ],
             ),

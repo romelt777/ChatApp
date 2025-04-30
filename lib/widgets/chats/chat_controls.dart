@@ -12,6 +12,7 @@ class ChatControls extends StatelessWidget {
   final Function(String) sendButtonToggle;
   final Function(String, int?, int) sendMessage;
   final int targetId;
+  final ScrollController scrollController;
 
   const ChatControls({
     super.key,
@@ -23,6 +24,7 @@ class ChatControls extends StatelessWidget {
     required this.sendButtonToggle,
     required this.sendMessage,
     required this.targetId,
+    required this.scrollController,
   });
 
   @override
@@ -96,6 +98,14 @@ class ChatControls extends StatelessWidget {
           if (showSendButton) {
             sendMessage(controller.text, currentUser?.id, targetId);
             controller.clear();
+            //Wait until the current frame (build phase) finishes
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              scrollController.animateTo(
+                scrollController.position.maxScrollExtent,
+                duration: Duration(milliseconds: 300),
+                curve: Curves.easeOut,
+              );
+            });
           }
         },
       ),

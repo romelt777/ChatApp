@@ -4,7 +4,8 @@ import 'package:chat_app/data/messages_data.dart';
 import 'package:flutter/material.dart';
 
 class MessageList extends StatelessWidget {
-  const MessageList({super.key});
+  final ScrollController scrollController;
+  const MessageList({super.key, required this.scrollController});
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +14,7 @@ class MessageList extends StatelessWidget {
     return SizedBox(
       height: MediaQuery.of(context).size.height - 250,
       child: ListView.builder(
+        controller: scrollController,
         shrinkWrap: true,
         itemCount: data.messages.length,
         itemBuilder: (context, index) {
