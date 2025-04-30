@@ -1,6 +1,7 @@
 import 'package:chat_app/data/chat_no_groups_data.dart';
 import 'package:chat_app/pages/camera_page.dart';
 import 'package:chat_app/pages/chat_page.dart';
+import 'package:chat_app/pages/status_page.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -55,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
           tabs: [Tab(icon: Icon(Icons.camera_alt)), Tab(text: "CHATS"), Tab(text: "STATUS"), Tab(text: "CALLS")],
         ),
       ),
-      body: TabBarView(controller: _controller, children: [CameraPage(), ChatPage(), Text("Status"), Text("Calls")]),
+      body: TabBarView(controller: _controller, children: [CameraPage(), ChatPage(), StatusPage(), Text("Calls")]),
     );
   }
 }

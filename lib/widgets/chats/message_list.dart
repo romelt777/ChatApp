@@ -1,5 +1,5 @@
-import 'package:chat_app/customui/message_reply.dart';
-import 'package:chat_app/customui/message_self.dart';
+import 'package:chat_app/custom_ui/message_reply.dart';
+import 'package:chat_app/custom_ui/message_self.dart';
 import 'package:chat_app/data/messages_data.dart';
 import 'package:flutter/material.dart';
 

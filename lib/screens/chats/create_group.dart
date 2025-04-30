@@ -1,5 +1,5 @@
-import 'package:chat_app/customui/contact_card.dart';
-import 'package:chat_app/customui/group_card.dart';
+import 'package:chat_app/custom_ui/contact_card.dart';
+import 'package:chat_app/custom_ui/group_card.dart';
 import 'package:chat_app/data/contact_data.dart';
 import 'package:chat_app/model/chat_model.dart';
 import 'package:flutter/material.dart';
