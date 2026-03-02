@@ -23,8 +23,14 @@ class MainApp extends StatelessWidget {
         fontFamily: "OpenSans",
         primaryColor: const Color(0xFF075E54),
         //appBar theme
-        appBarTheme: const AppBarTheme(backgroundColor: Color(0xFF075E54), foregroundColor: Colors.white),
-        tabBarTheme: const TabBarTheme(labelColor: Colors.white, unselectedLabelColor: Colors.white70),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFF075E54),
+          foregroundColor: Colors.white,
+        ),
+        tabBarTheme: const TabBarThemeData(
+          labelColor: Colors.white,
+          unselectedLabelColor: Colors.white,
+        ),
         colorScheme: ColorScheme.fromSwatch().copyWith(secondary: const Color(0xFF128C7E)),
       ),
       home: LoginScreen(),
