@@ -28,7 +28,7 @@ class _IndividualPageState extends State<IndividualPage> {
     super.initState();
     _connect();
     _setupFocusNodeListener();
-    _setUpMessageListener();
+    // _setUpMessageListener();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (scrollController.hasClients) {
         scrollController.animateTo(
@@ -102,6 +102,19 @@ class _IndividualPageState extends State<IndividualPage> {
     });
   }
 
+  void _scrollToBottom() {
+    //Wait until the current frame (build phase) finishes
+    if (scrollController.hasClients && scrollController.position.hasContentDimensions) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        scrollController.animateTo(
+          scrollController.position.maxScrollExtent,
+          duration: Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+        );
+      });
+    }
+  }
+
   void _connect() {
     //using localHost
     socket = IO.io("http://10.0.2.2:5000", <String, dynamic>{
@@ -113,21 +126,14 @@ class _IndividualPageState extends State<IndividualPage> {
     socket.emit("signin", currentUser?.id);
     //receiving message
     socket.onConnect((data) {
+      socket.off("message");
       print("Connected from flutter");
       socket.on("message", (msg) {
         print(msg);
         MessagesData().setMessage("destination", msg["message"], msg["time"]);
-        //Wait until the current frame (build phase) finishes
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          scrollController.animateTo(
-            scrollController.position.maxScrollExtent,
-            duration: Duration(milliseconds: 300),
-            curve: Curves.easeOut,
-          );
-        });
+        // _scrollToBottom();
       });
     });
-    print(socket.connected);
   }
 
   //outgoing message
@@ -139,6 +145,7 @@ class _IndividualPageState extends State<IndividualPage> {
       "targetId": targetId,
       "time": DateTime.now().toString().substring(10, 16),
     });
+    _scrollToBottom();
   }
 
   @override

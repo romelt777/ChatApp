@@ -37,14 +37,20 @@ class ChatControls extends StatelessWidget {
         height: 75,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
-          children: [_buildInputRow(context), showEmoji ? EmojiKeyboard(controller: controller) : Container()],
+          children: [
+            _buildInputRow(context),
+            showEmoji ? EmojiKeyboard(controller: controller) : Container(),
+          ],
         ),
       ),
     );
   }
 
   Widget _buildInputRow(BuildContext context) {
-    return SafeArea(bottom: !showEmoji, child: Row(children: [_buildTextField(context), _buildMultiButton()]));
+    return SafeArea(
+      bottom: !showEmoji,
+      child: Row(children: [_buildTextField(context), _buildMultiButton()]),
+    );
   }
 
   Widget _buildTextField(BuildContext context) {
@@ -65,7 +71,10 @@ class ChatControls extends StatelessWidget {
           decoration: InputDecoration(
             border: InputBorder.none,
             hintText: "Type a message",
-            prefixIcon: IconButton(onPressed: onEmojiToggle, icon: const Icon(Icons.emoji_emotions_outlined)),
+            prefixIcon: IconButton(
+              onPressed: onEmojiToggle,
+              icon: const Icon(Icons.emoji_emotions_outlined),
+            ),
             contentPadding: const EdgeInsets.all(5),
             suffixIcon: _buildSuffixIcons(context),
           ),
@@ -104,13 +113,15 @@ class ChatControls extends StatelessWidget {
             sendMessage(controller.text, currentUser?.id, targetId);
             controller.clear();
             //Wait until the current frame (build phase) finishes
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              scrollController.animateTo(
-                scrollController.position.maxScrollExtent,
-                duration: Duration(milliseconds: 300),
-                curve: Curves.easeOut,
-              );
-            });
+            if (scrollController.hasClients && scrollController.position.hasContentDimensions) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                scrollController.animateTo(
+                  scrollController.position.maxScrollExtent,
+                  duration: Duration(milliseconds: 300),
+                  curve: Curves.easeOut,
+                );
+              });
+            }
             changeSendMicButton();
           }
         },
