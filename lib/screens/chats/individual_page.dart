@@ -28,7 +28,7 @@ class _IndividualPageState extends State<IndividualPage> {
     super.initState();
     _connect();
     _setupFocusNodeListener();
-    // _setUpMessageListener();
+    _setUpMessageListener();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (scrollController.hasClients) {
         scrollController.animateTo(
@@ -131,7 +131,6 @@ class _IndividualPageState extends State<IndividualPage> {
       socket.on("message", (msg) {
         print(msg);
         MessagesData().setMessage("destination", msg["message"], msg["time"]);
-        // _scrollToBottom();
       });
     });
   }
