@@ -48,6 +48,7 @@ class _IndividualPageState extends State<IndividualPage> {
   void _onNewMessage() {
     if (!mounted) return;
     setState(() {});
+    _scrollToBottom();
   }
 
   void _setupFocusNodeListener() {
