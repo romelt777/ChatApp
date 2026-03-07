@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:chat_app/model/country_model.dart';
 
-Future<void> showMyDialogue(
+Future<void> EditPhoneNumber(
   BuildContext context,
   CountryModel country,
   TextEditingController controller,

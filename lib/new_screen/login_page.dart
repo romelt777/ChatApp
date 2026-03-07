@@ -1,8 +1,9 @@
 import 'package:chat_app/data/country_data.dart';
 import 'package:chat_app/model/country_model.dart';
 import 'package:chat_app/widgets/login/country_card.dart';
+import 'package:chat_app/widgets/login/edit_phone_number.dart';
+import 'package:chat_app/widgets/login/no_phone_number.dart';
 import 'package:chat_app/widgets/login/number_widget.dart';
-import 'package:chat_app/widgets/login/show_my_dialogue.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -72,7 +73,11 @@ class _LoginPageState extends State<LoginPage> {
             Expanded(child: Container()),
             InkWell(
               onTap: () {
-                showMyDialogue(context, country, _controller);
+                if (_controller.text.isEmpty) {
+                  noPhoneNumber(context, country, _controller);
+                } else {
+                  EditPhoneNumber(context, country, _controller);
+                }
               },
               child: Container(
                 color: Colors.tealAccent,
