@@ -2,6 +2,7 @@ import 'package:chat_app/data/country_data.dart';
 import 'package:chat_app/model/country_model.dart';
 import 'package:chat_app/widgets/login/country_card.dart';
 import 'package:chat_app/widgets/login/number_widget.dart';
+import 'package:chat_app/widgets/login/show_my_dialogue.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -22,42 +23,6 @@ class _LoginPageState extends State<LoginPage> {
       this.country = country;
     });
     Navigator.pop(context);
-  }
-
-  Future<void> showMyDialogue() {
-    return showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          content: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "We will be verifying your phone number",
-                  style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w300),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  "${country.code} ${_controller.text}",
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  "Is this OK, or would you like to edit the number?",
-                  style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w400),
-                ),
-              ],
-            ),
-          ),
-          actions: [
-            TextButton(onPressed: () {}, child: Text("Edit")),
-            TextButton(onPressed: () {}, child: Text("OK")),
-          ],
-        );
-      },
-    );
   }
 
   @override
@@ -107,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
             Expanded(child: Container()),
             InkWell(
               onTap: () {
-                showMyDialogue();
+                showMyDialogue(context, country, _controller);
               },
               child: Container(
                 color: Colors.tealAccent,
