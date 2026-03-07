@@ -1,14 +1,26 @@
+import 'package:chat_app/model/country_model.dart';
 import 'package:chat_app/widgets/login/country_page.dart';
 import 'package:flutter/material.dart';
 
 class CountryCard extends StatelessWidget {
-  const CountryCard({super.key});
+  final Function setCountryData;
+  final CountryModel country;
+
+  const CountryCard({super.key, required this.setCountryData, required this.country});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (builder) => CountryPage()));
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder:
+                (builder) => CountryPage(
+                  setCountryData: setCountryData,
+                ),
+          ),
+        );
       },
       child: Container(
         width: MediaQuery.of(context).size.width / 1.5,
@@ -24,10 +36,10 @@ class CountryCard extends StatelessWidget {
         child: Row(
           children: [
             Expanded(
-              child: Container(
+              child: SizedBox(
                 child: Center(
                   child: Text(
-                    "Philippines",
+                    country.name,
                     style: TextStyle(fontSize: 16),
                   ),
                 ),

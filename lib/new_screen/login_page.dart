@@ -1,3 +1,5 @@
+import 'package:chat_app/data/country_data.dart';
+import 'package:chat_app/model/country_model.dart';
 import 'package:chat_app/widgets/login/country_card.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +11,15 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  CountryModel country = CountryData().countries.firstWhere((c) => c.name == "Canada");
+
+  void setCountryData(CountryModel country) {
+    setState(() {
+      this.country = country;
+    });
+    Navigator.pop(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
 
       //BODY
-      body: Container(
+      body: SizedBox(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: Column(
@@ -44,7 +55,10 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(height: 5),
             Text("What's my number?", style: TextStyle(fontSize: 12.5, color: Colors.cyan[800])),
             SizedBox(height: 15),
-            CountryCard(),
+            CountryCard(
+              country: country,
+              setCountryData: setCountryData,
+            ),
           ],
         ),
       ),

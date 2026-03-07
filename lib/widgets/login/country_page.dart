@@ -3,7 +3,9 @@ import 'package:chat_app/widgets/login/country_card_list.dart';
 import 'package:flutter/material.dart';
 
 class CountryPage extends StatelessWidget {
-  const CountryPage({super.key});
+  final Function setCountryData;
+
+  const CountryPage({super.key, required this.setCountryData});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,11 @@ class CountryPage extends StatelessWidget {
       //BODY
       body: ListView.builder(
         itemCount: data.countries.length,
-        itemBuilder: (context, index) => CountryCardList(country: data.countries[index]),
+        itemBuilder:
+            (context, index) => CountryCardList(
+              country: data.countries[index],
+              setCountryData: setCountryData,
+            ),
       ),
     );
   }
