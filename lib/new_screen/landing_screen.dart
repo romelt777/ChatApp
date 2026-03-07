@@ -1,5 +1,5 @@
+import 'package:chat_app/new_screen/login_page.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
 
 class LandingScreen extends StatelessWidget {
   const LandingScreen({super.key});
@@ -8,7 +8,7 @@ class LandingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(
+        child: SizedBox(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child: Column(
@@ -51,7 +51,13 @@ class LandingScreen extends StatelessWidget {
               ),
               SizedBox(height: 20),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (builder) => LoginPage()),
+                    (route) => false,
+                  );
+                },
                 child: SizedBox(
                   height: 50,
                   width: MediaQuery.of(context).size.width - 110,
