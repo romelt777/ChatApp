@@ -1,3 +1,5 @@
+import 'package:chat_app/data/country_data.dart';
+import 'package:chat_app/widgets/login/country_card_list.dart';
 import 'package:flutter/material.dart';
 
 class CountryPage extends StatelessWidget {
@@ -5,7 +7,10 @@ class CountryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final data = CountryData();
+
     return Scaffold(
+      //APPBAR
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
@@ -34,6 +39,12 @@ class CountryPage extends StatelessWidget {
             onPressed: () {},
           ),
         ],
+      ),
+
+      //BODY
+      body: ListView.builder(
+        itemCount: data.countries.length,
+        itemBuilder: (context, index) => CountryCardList(country: data.countries[index]),
       ),
     );
   }
