@@ -1,10 +1,17 @@
 import 'package:chat_app/model/country_model.dart';
 import 'package:flutter/material.dart';
 
-class NumberWidget extends StatelessWidget {
+class NumberWidget extends StatefulWidget {
   final CountryModel country;
 
   const NumberWidget({super.key, required this.country});
+
+  @override
+  State<NumberWidget> createState() => _NumberWidgetState();
+}
+
+class _NumberWidgetState extends State<NumberWidget> {
+  TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +42,7 @@ class NumberWidget extends StatelessWidget {
                 ),
                 SizedBox(width: 10),
                 Text(
-                  country.code.substring(1),
+                  widget.country.code.substring(1),
                   style: TextStyle(
                     fontSize: 18,
                   ),
@@ -55,6 +62,7 @@ class NumberWidget extends StatelessWidget {
             ),
             width: (MediaQuery.of(context).size.width / 1.5) - 100,
             child: TextFormField(
+              controller: _controller,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.all(8),

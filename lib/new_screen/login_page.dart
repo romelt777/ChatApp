@@ -21,6 +21,27 @@ class _LoginPageState extends State<LoginPage> {
     Navigator.pop(context);
   }
 
+  Future<void> showMyDialogue() {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: SingleChildScrollView(
+            child: Column(
+              children: [
+                Text("Keep going Romel"),
+                Text("YES, lets go!"),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(onPressed: () {}, child: Text("Edit")),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,6 +85,24 @@ class _LoginPageState extends State<LoginPage> {
             NumberWidget(
               country: country,
             ),
+            Expanded(child: Container()),
+            InkWell(
+              onTap: () {
+                showMyDialogue();
+              },
+              child: Container(
+                color: Colors.tealAccent,
+                height: 40,
+                width: 70,
+                child: Center(
+                  child: Text(
+                    "NEXT",
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 60),
           ],
         ),
       ),
