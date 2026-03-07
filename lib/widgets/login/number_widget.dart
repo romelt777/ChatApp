@@ -8,7 +8,8 @@ class NumberWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 5),
       width: MediaQuery.of(context).size.width / 1.5,
       height: 40,
       child: Row(
@@ -25,13 +26,14 @@ class NumberWidget extends StatelessWidget {
             ),
             child: Row(
               children: [
+                SizedBox(width: 10),
                 Text(
                   "+",
                   style: TextStyle(
                     fontSize: 20,
                   ),
                 ),
-                SizedBox(width: 20),
+                SizedBox(width: 10),
                 Text(
                   country.code.substring(1),
                   style: TextStyle(
