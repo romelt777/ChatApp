@@ -18,6 +18,9 @@ class CountryPage extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.white,
         leading: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
           child: Icon(
             Icons.arrow_back,
             color: Colors.teal,

@@ -1,10 +1,68 @@
+import 'package:chat_app/model/country_model.dart';
 import 'package:flutter/material.dart';
 
 class NumberWidget extends StatelessWidget {
-  const NumberWidget({super.key});
+  final CountryModel country;
+
+  const NumberWidget({super.key, required this.country});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return SizedBox(
+      width: MediaQuery.of(context).size.width / 1.5,
+      height: 40,
+      child: Row(
+        children: [
+          Container(
+            width: 70,
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: Colors.teal,
+                  width: 2,
+                ),
+              ),
+            ),
+            child: Row(
+              children: [
+                Text(
+                  "+",
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+                SizedBox(width: 20),
+                Text(
+                  country.code.substring(1),
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(width: 30),
+          Container(
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: Colors.teal,
+                  width: 2,
+                ),
+              ),
+            ),
+            width: (MediaQuery.of(context).size.width / 1.5) - 100,
+            child: TextFormField(
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                contentPadding: EdgeInsets.all(8),
+                hintText: "phone number",
+                border: InputBorder.none,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

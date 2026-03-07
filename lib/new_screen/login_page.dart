@@ -1,6 +1,7 @@
 import 'package:chat_app/data/country_data.dart';
 import 'package:chat_app/model/country_model.dart';
 import 'package:chat_app/widgets/login/country_card.dart';
+import 'package:chat_app/widgets/login/number_widget.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -58,6 +59,10 @@ class _LoginPageState extends State<LoginPage> {
             CountryCard(
               country: country,
               setCountryData: setCountryData,
+            ),
+            SizedBox(height: 15),
+            NumberWidget(
+              country: country,
             ),
           ],
         ),
