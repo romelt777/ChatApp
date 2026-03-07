@@ -12,6 +12,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  //controller for number widget
+  TextEditingController _controller = TextEditingController();
+
   CountryModel country = CountryData().countries.firstWhere((c) => c.name == "Canada");
 
   void setCountryData(CountryModel country) {
@@ -28,14 +31,29 @@ class _LoginPageState extends State<LoginPage> {
         return AlertDialog(
           content: SingleChildScrollView(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Keep going Romel"),
-                Text("YES, lets go!"),
+                Text(
+                  "We will be verifying your phone number",
+                  style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w300),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  "${country.code} ${_controller.text}",
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  "Is this OK, or would you like to edit the number?",
+                  style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w400),
+                ),
               ],
             ),
           ),
           actions: [
             TextButton(onPressed: () {}, child: Text("Edit")),
+            TextButton(onPressed: () {}, child: Text("OK")),
           ],
         );
       },
@@ -84,6 +102,7 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(height: 15),
             NumberWidget(
               country: country,
+              controller: _controller,
             ),
             Expanded(child: Container()),
             InkWell(
