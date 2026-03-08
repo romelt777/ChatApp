@@ -42,7 +42,16 @@ Future<void> editPhoneNumber(
           TextButton(
             onPressed: () {
               Navigator.pop(context, "ok");
-              Navigator.push(context, MaterialPageRoute(builder: (builder) => OtpScreen()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder:
+                      (builder) => OtpScreen(
+                        number: controller.text,
+                        country: country,
+                      ),
+                ),
+              );
             },
             child: Text("OK"),
           ),
