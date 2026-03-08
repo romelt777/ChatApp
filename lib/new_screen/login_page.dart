@@ -17,6 +17,9 @@ class _LoginPageState extends State<LoginPage> {
   //controller for number widget
   TextEditingController _controller = TextEditingController();
 
+  //focus node for folding keyboard
+  final FocusNode _focusNode = FocusNode();
+
   CountryModel country = CountryData().countries.firstWhere((c) => c.name == "Canada");
 
   void setCountryData(CountryModel country) {
@@ -24,6 +27,12 @@ class _LoginPageState extends State<LoginPage> {
       this.country = country;
     });
     Navigator.pop(context);
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -71,6 +80,7 @@ class _LoginPageState extends State<LoginPage> {
               NumberWidget(
                 country: country,
                 controller: _controller,
+                focusNode: _focusNode,
               ),
               Expanded(child: Container()),
               InkWell(
@@ -78,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
                   if (_controller.text.isEmpty) {
                     noPhoneNumber(context, country, _controller);
                   } else {
-                    EditPhoneNumber(context, country, _controller);
+                    editPhoneNumber(context, country, _controller, _focusNode);
                   }
                 },
                 child: Container(

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:chat_app/model/country_model.dart';
 
-Future<void> EditPhoneNumber(
+Future<void> editPhoneNumber(
   BuildContext context,
   CountryModel country,
   TextEditingController controller,
-) {
-  return showDialog<void>(
+  FocusNode focusNode,
+) async {
+  final result = await showDialog<String>(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
@@ -38,11 +39,16 @@ Future<void> EditPhoneNumber(
             child: Text("Edit"),
           ),
           TextButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () {
+              Navigator.pop(context, "ok");
+            },
             child: Text("OK"),
           ),
         ],
       );
     },
   );
+  if (result == "ok") {
+    focusNode.unfocus();
+  }
 }

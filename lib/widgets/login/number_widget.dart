@@ -4,8 +4,14 @@ import 'package:flutter/material.dart';
 class NumberWidget extends StatelessWidget {
   final CountryModel country;
   final TextEditingController controller;
+  final FocusNode focusNode;
 
-  const NumberWidget({super.key, required this.country, required this.controller});
+  const NumberWidget({
+    super.key,
+    required this.country,
+    required this.controller,
+    required this.focusNode,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +62,7 @@ class NumberWidget extends StatelessWidget {
             ),
             width: (MediaQuery.of(context).size.width / 1.5) - 100,
             child: TextFormField(
+              focusNode: focusNode,
               controller: controller,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
