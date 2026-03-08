@@ -1,3 +1,4 @@
+import 'package:chat_app/new_screen/otp_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/model/country_model.dart';
 
@@ -6,8 +7,8 @@ Future<void> editPhoneNumber(
   CountryModel country,
   TextEditingController controller,
   FocusNode focusNode,
-) async {
-  final result = await showDialog<String>(
+) {
+  return showDialog<void>(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
@@ -41,6 +42,7 @@ Future<void> editPhoneNumber(
           TextButton(
             onPressed: () {
               Navigator.pop(context, "ok");
+              Navigator.push(context, MaterialPageRoute(builder: (builder) => OtpScreen()));
             },
             child: Text("OK"),
           ),
@@ -48,7 +50,7 @@ Future<void> editPhoneNumber(
       );
     },
   );
-  if (result == "ok") {
-    focusNode.unfocus();
-  }
+  // if (result == "ok") {
+  //   focusNode.unfocus();
+  // }
 }
