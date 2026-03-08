@@ -1,12 +1,12 @@
 import 'package:chat_app/model/country_model.dart';
-import 'package:chat_app/widgets/login/country_page.dart';
+import 'package:chat_app/pages/country_page.dart';
 import 'package:flutter/material.dart';
 
-class CountryCard extends StatelessWidget {
+class CountrySelector extends StatelessWidget {
   final Function setCountryData;
   final CountryModel country;
 
-  const CountryCard({super.key, required this.setCountryData, required this.country});
+  const CountrySelector({super.key, required this.setCountryData, required this.country});
 
   @override
   Widget build(BuildContext context) {

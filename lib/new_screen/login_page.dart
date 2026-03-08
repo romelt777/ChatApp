@@ -1,6 +1,6 @@
 import 'package:chat_app/data/country_data.dart';
 import 'package:chat_app/model/country_model.dart';
-import 'package:chat_app/widgets/login/country_card.dart';
+import 'package:chat_app/widgets/login/country_selector.dart';
 import 'package:chat_app/widgets/login/edit_phone_number.dart';
 import 'package:chat_app/widgets/login/no_phone_number.dart';
 import 'package:chat_app/widgets/login/number_widget.dart';
@@ -61,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(height: 5),
             Text("What's my number?", style: TextStyle(fontSize: 12.5, color: Colors.cyan[800])),
             SizedBox(height: 15),
-            CountryCard(
+            CountrySelector(
               country: country,
               setCountryData: setCountryData,
             ),
