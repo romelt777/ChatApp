@@ -1,5 +1,6 @@
 import 'package:chat_app/data/messages_data.dart';
 import 'package:chat_app/model/chat_model.dart';
+import 'package:chat_app/screens/cameras/camera_view.dart';
 import 'package:chat_app/utils/globals.dart';
 import 'package:chat_app/widgets/chats/app_bar_chats.dart';
 import 'package:chat_app/widgets/chats/chat_controls.dart';
@@ -49,6 +50,12 @@ class _IndividualPageState extends State<IndividualPage> {
     setState(() {
       file = result;
     });
+    if (mounted && file != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (builder) => CameraView(path: file!.path)),
+      );
+    }
   }
 
   void _setUpMessageListener() {
