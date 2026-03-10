@@ -1,3 +1,5 @@
+import 'package:chat_app/custom_ui/file_reply.dart';
+import 'package:chat_app/custom_ui/file_self.dart';
 import 'package:chat_app/data/messages_data.dart';
 import 'package:chat_app/model/chat_model.dart';
 import 'package:chat_app/screens/cameras/camera_view.dart';
@@ -187,7 +189,9 @@ class _IndividualPageState extends State<IndividualPage> {
             child: PopScope(
               child: Column(
                 children: [
-                  MessageList(scrollController: scrollController),
+                  // MessageList(scrollController: scrollController),
+                  FileSelf(),
+                  FileReply(),
                   ChatControls(
                     controller: _controller,
                     focusNode: _focusNode,
