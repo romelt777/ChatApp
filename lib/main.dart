@@ -34,7 +34,7 @@ class MainApp extends StatelessWidget {
         ),
         colorScheme: ColorScheme.fromSwatch().copyWith(secondary: const Color(0xFF128C7E)),
       ),
-      home: LandingScreen(),
+      home: LoginScreen(),
     );
   }
 }
