@@ -1,3 +1,4 @@
+import 'package:chat_app/screens/cameras/camera_screen.dart';
 import 'package:chat_app/utils/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/widgets/chats/attachment_bottom_sheet.dart';
@@ -109,7 +110,15 @@ class ChatControls extends StatelessWidget {
           },
           icon: const Icon(Icons.attach_file),
         ),
-        IconButton(onPressed: () {}, icon: const Icon(Icons.camera_alt)),
+        IconButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (builder) => CameraScreen()),
+            );
+          },
+          icon: const Icon(Icons.camera_alt),
+        ),
       ],
     );
   }

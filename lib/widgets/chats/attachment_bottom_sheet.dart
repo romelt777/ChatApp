@@ -1,3 +1,4 @@
+import 'package:chat_app/screens/cameras/camera_screen.dart';
 import 'package:chat_app/widgets/chats/attachment_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -29,7 +30,17 @@ class AttachmentBottomSheet extends StatelessWidget {
                     label: "Document",
                   ),
                   SizedBox(width: 40),
-                  AttachmentIcon(icon: Icons.camera_alt, color: Colors.pink, label: "Camera"),
+                  AttachmentIcon(
+                    icon: Icons.camera_alt,
+                    color: Colors.pink,
+                    label: "Camera",
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (builder) => CameraScreen()),
+                      );
+                    },
+                  ),
                   SizedBox(width: 40),
                   AttachmentIcon(
                     icon: Icons.insert_photo,
