@@ -1,8 +1,13 @@
 import 'package:chat_app/widgets/chats/attachment_icon.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AttachmentBottomSheet extends StatelessWidget {
-  const AttachmentBottomSheet({super.key});
+  final ImagePicker picker;
+  final XFile? file;
+  final VoidCallback pickImage;
+
+  AttachmentBottomSheet({super.key, required this.picker, this.file, required this.pickImage});
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +22,21 @@ class AttachmentBottomSheet extends StatelessWidget {
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  AttachmentIcon(icon: Icons.insert_drive_file, color: Colors.indigo, label: "Document"),
+                children: [
+                  AttachmentIcon(
+                    icon: Icons.insert_drive_file,
+                    color: Colors.indigo,
+                    label: "Document",
+                  ),
                   SizedBox(width: 40),
                   AttachmentIcon(icon: Icons.camera_alt, color: Colors.pink, label: "Camera"),
                   SizedBox(width: 40),
-                  AttachmentIcon(icon: Icons.insert_photo, color: Colors.purple, label: "Gallery"),
+                  AttachmentIcon(
+                    icon: Icons.insert_photo,
+                    color: Colors.purple,
+                    label: "Gallery",
+                    onTap: pickImage,
+                  ),
                 ],
               ),
               const SizedBox(height: 30),

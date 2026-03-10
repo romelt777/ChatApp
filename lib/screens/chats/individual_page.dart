@@ -5,6 +5,7 @@ import 'package:chat_app/widgets/chats/app_bar_chats.dart';
 import 'package:chat_app/widgets/chats/chat_controls.dart';
 import 'package:chat_app/widgets/chats/message_list.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class IndividualPage extends StatefulWidget {
@@ -22,6 +23,8 @@ class _IndividualPageState extends State<IndividualPage> {
   late IO.Socket socket; //io socket
   bool _showSendButton = false;
   ScrollController scrollController = ScrollController();
+  final ImagePicker _picker = ImagePicker(); //for gallery image picker
+  XFile? file; // cross platform file
 
   @override
   void initState() {
@@ -37,6 +40,14 @@ class _IndividualPageState extends State<IndividualPage> {
           curve: Curves.easeOut,
         );
       }
+    });
+  }
+
+  //for gallery button
+  Future<void> pickImage() async {
+    final result = await _picker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      file = result;
     });
   }
 
@@ -181,6 +192,9 @@ class _IndividualPageState extends State<IndividualPage> {
                     sendMessage: sendMessage,
                     targetId: widget.chatModel.id,
                     scrollController: scrollController,
+                    picker: _picker,
+                    file: file,
+                    pickImage: pickImage,
                   ),
                 ],
               ),

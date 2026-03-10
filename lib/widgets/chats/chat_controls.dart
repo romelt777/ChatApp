@@ -2,6 +2,7 @@ import 'package:chat_app/utils/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/widgets/chats/attachment_bottom_sheet.dart';
 import 'package:chat_app/widgets/chats/emoji_keyboard.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ChatControls extends StatelessWidget {
   final TextEditingController controller;
@@ -14,8 +15,11 @@ class ChatControls extends StatelessWidget {
   final Function(String, int?, int) sendMessage;
   final int targetId;
   final ScrollController scrollController;
+  final ImagePicker picker;
+  final XFile? file;
+  final VoidCallback pickImage;
 
-  const ChatControls({
+  ChatControls({
     super.key,
     required this.controller,
     required this.focusNode,
@@ -27,6 +31,9 @@ class ChatControls extends StatelessWidget {
     required this.sendMessage,
     required this.targetId,
     required this.scrollController,
+    required this.picker,
+    required this.file,
+    required this.pickImage,
   });
 
   @override
@@ -92,7 +99,12 @@ class ChatControls extends StatelessWidget {
             showModalBottomSheet(
               backgroundColor: Colors.transparent,
               context: context,
-              builder: (builder) => const AttachmentBottomSheet(),
+              builder:
+                  (builder) => AttachmentBottomSheet(
+                    picker: picker,
+                    file: file,
+                    pickImage: pickImage,
+                  ),
             );
           },
           icon: const Icon(Icons.attach_file),
