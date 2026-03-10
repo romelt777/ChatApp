@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 class FileSelf extends StatelessWidget {
-  const FileSelf({super.key});
+  final String path;
+
+  const FileSelf({super.key, required this.path});
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +30,7 @@ class FileSelf extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
             ),
+            child: Image.file(File(path)),
           ),
         ),
       ),

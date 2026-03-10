@@ -13,7 +13,7 @@ class ChatControls extends StatelessWidget {
   final bool showSendButton;
   final VoidCallback changeSendMicButton;
   final Function(String) sendButtonToggle;
-  final Function(String, int?, int) sendMessage;
+  final Function(String, int?, int, String?) sendMessage;
   final int targetId;
   final ScrollController scrollController;
   final ImagePicker picker;
@@ -131,7 +131,7 @@ class ChatControls extends StatelessWidget {
         icon: Icon(showSendButton ? Icons.send : Icons.mic, color: Colors.white),
         onPressed: () {
           if (showSendButton) {
-            sendMessage(controller.text, currentUser?.id, targetId);
+            sendMessage(controller.text, currentUser?.id, targetId, file?.path);
             controller.clear();
             //Wait until the current frame (build phase) finishes
             if (scrollController.hasClients && scrollController.position.hasContentDimensions) {

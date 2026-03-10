@@ -151,22 +151,28 @@ class _IndividualPageState extends State<IndividualPage> {
       print("Connected from flutter");
       socket.on("message", (msg) {
         print(msg);
-        MessagesData().setMessage("destination", msg["message"], msg["time"]);
+        MessagesData().setMessage("destination", msg["message"], msg["time"], msg["path"]);
       });
     });
   }
 
   //outgoing message
-  void sendMessage(String message, int? sourceId, int targetId) {
-    MessagesData().setMessage("source", message, DateTime.now().toString().substring(10, 16));
+  void sendMessage(String message, int? sourceId, int targetId, String? path) {
+    MessagesData().setMessage("source", message, DateTime.now().toString().substring(10, 16), path);
     socket.emit("message", {
       "message": message,
       "sourceId": sourceId,
       "targetId": targetId,
       "time": DateTime.now().toString().substring(10, 16),
+      "path": path,
     });
     _scrollToBottom();
   }
+
+  // //method for the camera, to add image to message
+  // void sendImage(){
+
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -189,9 +195,7 @@ class _IndividualPageState extends State<IndividualPage> {
             child: PopScope(
               child: Column(
                 children: [
-                  // MessageList(scrollController: scrollController),
-                  FileSelf(),
-                  FileReply(),
+                  MessageList(scrollController: scrollController),
                   ChatControls(
                     controller: _controller,
                     focusNode: _focusNode,
