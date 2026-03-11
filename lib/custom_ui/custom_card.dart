@@ -43,7 +43,7 @@ class CustomCard extends StatelessWidget {
                 SizedBox(width: 3),
                 Text(
                   chatModel.currentMessage ?? "No Message Available",
-                  style: TextStyle(fontSize: 13),
+                  style: TextStyle(fontSize: 14),
                 ),
               ],
             ),

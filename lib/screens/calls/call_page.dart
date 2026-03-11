@@ -2,14 +2,14 @@ import 'package:chat_app/data/call_data.dart';
 import 'package:chat_app/widgets/calls/call_card.dart';
 import 'package:flutter/material.dart';
 
-class CallScreen extends StatefulWidget {
-  const CallScreen({super.key});
+class CallPage extends StatefulWidget {
+  const CallPage({super.key});
 
   @override
-  State<CallScreen> createState() => _CallScreenState();
+  State<CallPage> createState() => _CallPageState();
 }
 
-class _CallScreenState extends State<CallScreen> {
+class _CallPageState extends State<CallPage> {
   var data = CallData();
 
   @override
