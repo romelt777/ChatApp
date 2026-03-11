@@ -7,8 +7,15 @@ class AttachmentBottomSheet extends StatelessWidget {
   final ImagePicker picker;
   final XFile? file;
   final VoidCallback pickImage;
+  final Function onImageSend;
 
-  AttachmentBottomSheet({super.key, required this.picker, this.file, required this.pickImage});
+  AttachmentBottomSheet({
+    super.key,
+    required this.picker,
+    this.file,
+    required this.pickImage,
+    required this.onImageSend,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +44,12 @@ class AttachmentBottomSheet extends StatelessWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (builder) => CameraScreen()),
+                        MaterialPageRoute(
+                          builder:
+                              (builder) => CameraScreen(
+                                onImageSend: onImageSend,
+                              ),
+                        ),
                       );
                     },
                   ),

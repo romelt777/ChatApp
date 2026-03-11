@@ -46,20 +46,6 @@ class _IndividualPageState extends State<IndividualPage> {
     });
   }
 
-  //for gallery button
-  Future<void> pickImage() async {
-    final result = await _picker.pickImage(source: ImageSource.gallery);
-    setState(() {
-      file = result;
-    });
-    if (mounted && file != null) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (builder) => CameraView(path: file!.path)),
-      );
-    }
-  }
-
   void _setUpMessageListener() {
     MessagesData().addListener(_onNewMessage);
   }
@@ -136,6 +122,8 @@ class _IndividualPageState extends State<IndividualPage> {
     }
   }
 
+  // MESSAGES----------------------------------------------->
+
   void _connect() {
     //using localHost
     socket = IO.io("http://10.0.2.2:5000", <String, dynamic>{
@@ -169,10 +157,32 @@ class _IndividualPageState extends State<IndividualPage> {
     _scrollToBottom();
   }
 
-  // //method for the camera, to add image to message
-  // void sendImage(){
+  // <-----------------------------------------------MESSAGES
 
-  // }
+  //for gallery images button
+  Future<void> pickImage() async {
+    final result = await _picker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      file = result;
+    });
+    if (mounted && file != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder:
+              (builder) => CameraView(
+                path: file!.path,
+                onImageSend: onImageSend,
+              ),
+        ),
+      );
+    }
+  }
+
+  // //method for the camera, to add image to message
+  void onImageSend(String path) {
+    print("HELLO I AM WORKING: $path");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -210,6 +220,7 @@ class _IndividualPageState extends State<IndividualPage> {
                     picker: _picker,
                     file: file,
                     pickImage: pickImage,
+                    onImageSend: onImageSend,
                   ),
                 ],
               ),

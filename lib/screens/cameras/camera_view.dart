@@ -3,7 +3,13 @@ import 'package:flutter/material.dart';
 
 class CameraView extends StatefulWidget {
   final String path;
-  const CameraView({super.key, required this.path});
+  final Function? onImageSend;
+
+  const CameraView({
+    super.key,
+    required this.path,
+    this.onImageSend,
+  });
 
   @override
   State<CameraView> createState() => _CameraViewState();
@@ -76,10 +82,17 @@ class _CameraViewState extends State<CameraView> {
                     prefixIcon: Icon(Icons.add_photo_alternate, color: Colors.white, size: 27),
                     hintText: "Add Caption...",
                     hintStyle: TextStyle(color: Colors.white, fontSize: 17),
-                    suffixIcon: CircleAvatar(
-                      radius: 27,
-                      backgroundColor: Colors.teal[700],
-                      child: Icon(Icons.check, color: Colors.white, size: 27),
+                    suffixIcon: InkWell(
+                      onTap: () {
+                        if (widget.onImageSend != null) {
+                          widget.onImageSend!.call(widget.path);
+                        } else {}
+                      },
+                      child: CircleAvatar(
+                        radius: 27,
+                        backgroundColor: Colors.teal[700],
+                        child: Icon(Icons.check, color: Colors.white, size: 27),
+                      ),
                     ),
                   ),
                 ),

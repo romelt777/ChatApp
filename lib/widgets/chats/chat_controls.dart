@@ -19,6 +19,7 @@ class ChatControls extends StatelessWidget {
   final ImagePicker picker;
   final XFile? file;
   final VoidCallback pickImage;
+  final Function onImageSend;
 
   ChatControls({
     super.key,
@@ -35,6 +36,7 @@ class ChatControls extends StatelessWidget {
     required this.picker,
     required this.file,
     required this.pickImage,
+    required this.onImageSend,
   });
 
   @override
@@ -105,6 +107,7 @@ class ChatControls extends StatelessWidget {
                     picker: picker,
                     file: file,
                     pickImage: pickImage,
+                    onImageSend: onImageSend,
                   ),
             );
           },
@@ -114,7 +117,12 @@ class ChatControls extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (builder) => CameraScreen()),
+              MaterialPageRoute(
+                builder:
+                    (builder) => CameraScreen(
+                      onImageSend: onImageSend,
+                    ),
+              ),
             );
           },
           icon: const Icon(Icons.camera_alt),

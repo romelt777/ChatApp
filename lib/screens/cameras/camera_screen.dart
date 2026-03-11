@@ -10,7 +10,9 @@ import 'package:path_provider/path_provider.dart';
 late List<CameraDescription> cameras;
 
 class CameraScreen extends StatefulWidget {
-  const CameraScreen({super.key});
+  final Function? onImageSend;
+
+  const CameraScreen({super.key, this.onImageSend});
 
   @override
   State<CameraScreen> createState() => _CameraScreenState();
@@ -76,7 +78,11 @@ class _CameraScreenState extends State<CameraScreen> {
                               ? _cameraController.setFlashMode(FlashMode.torch)
                               : _cameraController.setFlashMode(FlashMode.off);
                         },
-                        icon: Icon(_flash ? Icons.flash_on : Icons.flash_off, color: Colors.white, size: 28),
+                        icon: Icon(
+                          _flash ? Icons.flash_on : Icons.flash_off,
+                          color: Colors.white,
+                          size: 28,
+                        ),
                       ),
                       //CAMERA BUTTON
                       GestureDetector(
@@ -105,7 +111,10 @@ class _CameraScreenState extends State<CameraScreen> {
                           });
                           //check which camera is on
                           int cameraPosition = _cameraFront ? 0 : 1;
-                          _cameraController = CameraController(cameras[cameraPosition], ResolutionPreset.high);
+                          _cameraController = CameraController(
+                            cameras[cameraPosition],
+                            ResolutionPreset.high,
+                          );
                           cameraValue = _cameraController.initialize();
                         },
                         //transform to rotate/flip camera icon
@@ -142,7 +151,16 @@ class _CameraScreenState extends State<CameraScreen> {
 
     //sending to new screen
     if (context.mounted) {
-      Navigator.push(context, MaterialPageRoute(builder: (builder) => CameraView(path: picture.path)));
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder:
+              (builder) => CameraView(
+                path: picture.path,
+                onImageSend: widget.onImageSend,
+              ),
+        ),
+      );
     }
   }
 
