@@ -218,7 +218,7 @@ class _IndividualPageState extends State<IndividualPage> {
       "sourceId": currentUser!.id,
       "targetId": widget.chatModel.id,
       "time": DateTime.now().toString().substring(10, 16),
-      "path": path,
+      "path": data["path"],
     });
   }
 

@@ -25,8 +25,8 @@ class FileReply extends StatelessWidget {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                Image.file(
-                  File(path),
+                Image.network(
+                  "http://10.0.2.2:5000/uploads/$path",
                   fit: BoxFit.cover,
                 ),
                 if (messageUI != null)
