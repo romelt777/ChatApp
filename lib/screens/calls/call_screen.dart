@@ -1,3 +1,4 @@
+import 'package:chat_app/widgets/calls/call_card.dart';
 import 'package:flutter/material.dart';
 
 class CallScreen extends StatefulWidget {
@@ -10,6 +11,16 @@ class CallScreen extends StatefulWidget {
 class _CallScreenState extends State<CallScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      //BODY
+      body: ListView(
+        children: [
+          CallCard(),
+          CallCard(),
+          CallCard(),
+          CallCard(),
+        ],
+      ),
+    );
   }
 }
