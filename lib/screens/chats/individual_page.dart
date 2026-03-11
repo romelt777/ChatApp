@@ -10,6 +10,7 @@ import 'package:chat_app/widgets/chats/message_list.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'package:http/http.dart' as http;
 
 class IndividualPage extends StatefulWidget {
   final ChatModel chatModel;
@@ -180,8 +181,20 @@ class _IndividualPageState extends State<IndividualPage> {
   }
 
   // //method for the camera, to add image to message
-  void onImageSend(String path) {
+  void onImageSend(String path) async {
     print("HELLO I AM WORKING: $path");
+
+    //creating request, 10.0.2.2:3000, is my local host.
+    var request = http.MultipartRequest(
+      "POST",
+      Uri.parse("http://10.0.2.2:5000/route/addImages"),
+    );
+    request.files.add(await http.MultipartFile.fromPath("img", path));
+    request.headers.addAll({
+      "Content-type": "multipart/form-data",
+    });
+    http.StreamedResponse response = await request.send();
+    print(response.statusCode);
   }
 
   @override
