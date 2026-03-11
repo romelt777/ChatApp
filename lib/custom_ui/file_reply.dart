@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 
 class FileReply extends StatelessWidget {
@@ -11,8 +9,6 @@ class FileReply extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String? messageUI = message;
-
     return Align(
       alignment: Alignment.centerLeft,
       child: Padding(
@@ -29,20 +25,55 @@ class FileReply extends StatelessWidget {
                   "http://10.0.2.2:5000/uploads/$path",
                   fit: BoxFit.cover,
                 ),
-                if (messageUI != null)
-                  Positioned(
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    child: Container(
-                      color: Colors.black45,
-                      padding: EdgeInsets.all(6),
-                      child: Text(
-                        messageUI,
-                        style: TextStyle(color: Colors.white),
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                        colors: [
+                          Colors.black54,
+                          Colors.transparent,
+                        ],
                       ),
                     ),
+                    padding: const EdgeInsets.only(
+                      left: 8,
+                      right: 8,
+                      bottom: 6,
+                      top: 20,
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        if (message != null)
+                          Expanded(
+                            child: Text(
+                              message!,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 13,
+                              ),
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+
+                        //TIMESTAMP
+                        Text(
+                          time,
+                          style: TextStyle(
+                            color: Colors.white.withValues(alpha: 0.85),
+                            fontSize: 11,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
+                ),
               ],
             ),
           ),
