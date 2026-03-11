@@ -21,7 +21,11 @@ class MessageList extends StatelessWidget {
           if (data.messages[index].type == "source") {
             final path = data.messages[index].path;
             if (path != null) {
-              return FileSelf(path: path);
+              return FileSelf(
+                message: data.messages[index].message,
+                time: data.messages[index].time,
+                path: path,
+              );
             }
             return MessageSelf(
               message: data.messages[index].message,

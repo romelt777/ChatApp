@@ -3,13 +3,16 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 class FileSelf extends StatelessWidget {
+  final String? message;
+  final String time;
   final String path;
 
-  const FileSelf({super.key, required this.path});
+  const FileSelf({super.key, this.message, required this.time, required this.path});
 
   @override
   Widget build(BuildContext context) {
     print(path);
+    final String? messageUI = message;
 
     return Align(
       alignment: Alignment.centerRight,
@@ -32,7 +35,18 @@ class FileSelf extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
             ),
-            child: Image.file(File(path)),
+            clipBehavior: Clip.antiAlias,
+            child: Column(
+              children: [
+                Expanded(
+                  child: Image.file(
+                    File(path),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                if (messageUI != null) Text(messageUI),
+              ],
+            ),
           ),
         ),
       ),
