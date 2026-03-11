@@ -84,6 +84,12 @@ class _IndividualPageState extends State<IndividualPage> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _scrollToBottom();
+  }
+
+  @override
   void dispose() {
     _focusNode.dispose();
     _controller.dispose();
@@ -157,7 +163,6 @@ class _IndividualPageState extends State<IndividualPage> {
       "time": DateTime.now().toString().substring(10, 16),
       "path": path,
     });
-    _scrollToBottom();
   }
 
   // <-----------------------------------------------MESSAGES

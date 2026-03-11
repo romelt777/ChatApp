@@ -139,18 +139,8 @@ class ChatControls extends StatelessWidget {
         icon: Icon(showSendButton ? Icons.send : Icons.mic, color: Colors.white),
         onPressed: () {
           if (showSendButton) {
-            sendMessage(controller.text, currentUser?.id, targetId, file?.path);
+            sendMessage(controller.text, currentUser?.id, targetId, null);
             controller.clear();
-            //Wait until the current frame (build phase) finishes
-            if (scrollController.hasClients && scrollController.position.hasContentDimensions) {
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                scrollController.animateTo(
-                  scrollController.position.maxScrollExtent,
-                  duration: Duration(milliseconds: 300),
-                  curve: Curves.easeOut,
-                );
-              });
-            }
             changeSendMicButton();
           }
         },
