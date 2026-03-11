@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:chat_app/custom_ui/file_reply.dart';
 import 'package:chat_app/custom_ui/file_self.dart';
 import 'package:chat_app/data/messages_data.dart';
@@ -196,14 +198,16 @@ class _IndividualPageState extends State<IndividualPage> {
     request.headers.addAll({
       "Content-type": "multipart/form-data",
     });
-    http.StreamedResponse response = await request.send();
+    http.StreamedResponse response = await request.send(); //sending to backend
+    var httpResponse = await http.Response.fromStream(response);
+    var data = json.decode(httpResponse.body);
+
     MessagesData().setMessage(
       "source",
       message,
       DateTime.now().toString().substring(10, 16),
-      path,
+      data['path'],
     );
-    print(response.statusCode);
     socket.emit("message", {
       "message": message,
       "sourceId": currentUser!.id,
