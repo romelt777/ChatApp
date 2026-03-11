@@ -1,3 +1,4 @@
+import 'package:chat_app/custom_ui/file_reply.dart';
 import 'package:chat_app/custom_ui/file_self.dart';
 import 'package:chat_app/custom_ui/message_reply.dart';
 import 'package:chat_app/custom_ui/message_self.dart';
@@ -32,6 +33,14 @@ class MessageList extends StatelessWidget {
               time: data.messages[index].time,
             );
           } else {
+            final path = data.messages[index].path;
+            if (path != null) {
+              return FileReply(
+                message: data.messages[index].message,
+                time: data.messages[index].time,
+                path: path,
+              );
+            }
             return MessageReply(
               message: data.messages[index].message,
               time: data.messages[index].time,
