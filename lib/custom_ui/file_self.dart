@@ -9,6 +9,8 @@ class FileSelf extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(path);
+
     return Align(
       alignment: Alignment.centerRight,
       child: Padding(

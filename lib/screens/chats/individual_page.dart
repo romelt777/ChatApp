@@ -206,7 +206,7 @@ class _IndividualPageState extends State<IndividualPage> {
       "source",
       message,
       DateTime.now().toString().substring(10, 16),
-      data['path'],
+      path,
     );
     socket.emit("message", {
       "message": message,
