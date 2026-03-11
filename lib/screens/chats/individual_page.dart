@@ -1,7 +1,4 @@
 import 'dart:convert';
-
-import 'package:chat_app/custom_ui/file_reply.dart';
-import 'package:chat_app/custom_ui/file_self.dart';
 import 'package:chat_app/data/messages_data.dart';
 import 'package:chat_app/model/chat_model.dart';
 import 'package:chat_app/screens/cameras/camera_view.dart';

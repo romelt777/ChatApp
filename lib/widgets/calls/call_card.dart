@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
 
 class CallCard extends StatelessWidget {
-  const CallCard({super.key});
+  final String name;
+  final IconData iconData;
+  final Color iconColor;
+  final String time;
+
+  const CallCard({
+    super.key,
+    required this.name,
+    required this.iconData,
+    required this.iconColor,
+    required this.time,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -12,19 +23,19 @@ class CallCard extends StatelessWidget {
           radius: 26,
         ),
         title: Text(
-          "ROM",
+          name,
           style: TextStyle(fontWeight: FontWeight.w500),
         ),
         subtitle: Row(
           children: [
             Icon(
-              Icons.call_made,
-              color: Colors.green,
+              iconData,
+              color: iconColor,
               size: 20,
             ),
             SizedBox(width: 8),
             Text(
-              "March 3, 16:08",
+              time,
               style: TextStyle(fontSize: 14),
             ),
           ],
