@@ -181,8 +181,11 @@ class _IndividualPageState extends State<IndividualPage> {
   }
 
   // //method for the camera, to add image to message
-  void onImageSend(String path) async {
+  void onImageSend(String path, String message) async {
     print("HELLO I AM WORKING: $path");
+
+    //popping back to message screen
+    Navigator.popUntil(context, ModalRoute.withName("/message_convo"));
 
     //creating request, 10.0.2.2:3000, is my local host.
     var request = http.MultipartRequest(
@@ -194,7 +197,20 @@ class _IndividualPageState extends State<IndividualPage> {
       "Content-type": "multipart/form-data",
     });
     http.StreamedResponse response = await request.send();
+    MessagesData().setMessage(
+      "source",
+      message,
+      DateTime.now().toString().substring(10, 16),
+      path,
+    );
     print(response.statusCode);
+    socket.emit("message", {
+      "message": message,
+      "sourceId": currentUser!.id,
+      "targetId": widget.chatModel.id,
+      "time": DateTime.now().toString().substring(10, 16),
+      "path": path,
+    });
   }
 
   @override

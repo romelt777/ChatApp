@@ -18,6 +18,7 @@ class CameraView extends StatefulWidget {
 class _CameraViewState extends State<CameraView> {
   bool _keyboardOpened = false;
   FocusNode _focusNode = FocusNode();
+  TextEditingController _controller = TextEditingController();
 
   @override
   void initState() {
@@ -72,6 +73,7 @@ class _CameraViewState extends State<CameraView> {
                 padding: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
                 //FORM FOR ADDING CAPTIONS
                 child: TextFormField(
+                  controller: _controller,
                   focusNode: _focusNode,
                   style: TextStyle(color: Colors.white, fontSize: 17),
                   maxLines: 6,
@@ -85,7 +87,7 @@ class _CameraViewState extends State<CameraView> {
                     suffixIcon: InkWell(
                       onTap: () {
                         if (widget.onImageSend != null) {
-                          widget.onImageSend!.call(widget.path);
+                          widget.onImageSend!.call(widget.path, _controller.text);
                         } else {}
                       },
                       child: CircleAvatar(
