@@ -37,6 +37,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    // FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -88,7 +90,12 @@ class _LoginPageState extends State<LoginPage> {
                   if (_controller.text.isEmpty) {
                     noPhoneNumber(context, country, _controller);
                   } else {
-                    editPhoneNumber(context, country, _controller, _focusNode);
+                    editPhoneNumber(
+                      context,
+                      country,
+                      _controller,
+                      _focusNode,
+                    );
                   }
                 },
                 child: Container(

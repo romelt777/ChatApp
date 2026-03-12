@@ -1,4 +1,5 @@
 import 'package:chat_app/model/country_model.dart';
+import 'package:chat_app/services/auth_services.dart';
 import 'package:chat_app/widgets/otp/otp_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
@@ -6,14 +7,23 @@ import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 class OtpScreen extends StatefulWidget {
   final String number;
   final CountryModel country;
+  final String verificationId;
 
-  const OtpScreen({super.key, required this.number, required this.country});
+  const OtpScreen({
+    super.key,
+    required this.number,
+    required this.country,
+    required this.verificationId,
+  });
 
   @override
   State<OtpScreen> createState() => _OtpScreenState();
 }
 
 class _OtpScreenState extends State<OtpScreen> {
+  AuthClass authClass = AuthClass();
+  String smsCode = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,7 +99,13 @@ class _OtpScreenState extends State<OtpScreen> {
                 //handle validation or checks here if necessary
               },
               //runs when every textfield is filled
-              onSubmit: (String verificationCode) {},
+              onSubmit: (String verificationCode) async {
+                await authClass.signInWithPhoneNumber(
+                  widget.verificationId,
+                  verificationCode,
+                  context,
+                );
+              },
             ),
             SizedBox(height: 45),
             Text(

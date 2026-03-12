@@ -11,10 +11,10 @@ Future<void> main() async {
   //make sure flutter is finished setting up
   WidgetsFlutterBinding.ensureInitialized();
 
-  // //connecting app to firebase
-  // await Firebase.initializeApp(
-  //   options: DefaultFirebaseOptions.currentPlatform,
-  // );
+  //connecting app to firebase
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   //scans device for cameras, wait until finished finding cameras
   cameras = await availableCameras();
@@ -42,7 +42,7 @@ class MainApp extends StatelessWidget {
         ),
         colorScheme: ColorScheme.fromSwatch().copyWith(secondary: const Color(0xFF128C7E)),
       ),
-      home: LoginScreen(),
+      home: LandingScreen(),
     );
   }
 }

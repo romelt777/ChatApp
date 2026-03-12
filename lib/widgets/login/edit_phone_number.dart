@@ -1,4 +1,5 @@
 import 'package:chat_app/new_screen/otp_screen.dart';
+import 'package:chat_app/services/auth_services.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/model/country_model.dart';
 
@@ -11,6 +12,8 @@ Future<void> editPhoneNumber(
   return showDialog<void>(
     context: context,
     builder: (BuildContext context) {
+      AuthClass authClass = AuthClass();
+
       return AlertDialog(
         content: SingleChildScrollView(
           child: Column(
@@ -40,18 +43,9 @@ Future<void> editPhoneNumber(
             child: Text("Edit"),
           ),
           TextButton(
-            onPressed: () {
-              Navigator.pop(context, "ok");
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder:
-                      (builder) => OtpScreen(
-                        number: controller.text,
-                        country: country,
-                      ),
-                ),
-              );
+            onPressed: () async {
+              String fullNumber = country.code + controller.text;
+              await authClass.verifyPhoneNumber(fullNumber, context, country);
             },
             child: Text("OK"),
           ),
