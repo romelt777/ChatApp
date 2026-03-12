@@ -3,10 +3,18 @@ import 'package:chat_app/new_screen/landing_screen.dart';
 import 'package:chat_app/screens/cameras/camera_screen.dart';
 import 'package:chat_app/screens/login_screen.dart';
 import 'package:flutter/material.dart';
+//firebase imports
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 Future<void> main() async {
   //make sure flutter is finished setting up
   WidgetsFlutterBinding.ensureInitialized();
+
+  // //connecting app to firebase
+  // await Firebase.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
 
   //scans device for cameras, wait until finished finding cameras
   cameras = await availableCameras();
