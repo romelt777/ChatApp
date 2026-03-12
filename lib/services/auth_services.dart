@@ -52,7 +52,7 @@ class AuthClass {
             as PhoneCodeSent;
 
     //runs when time for the code has expired. only runs if success/fail do not run
-    PhoneCodeAutoRetrievalTimeout codeAutoRetrievalTimeout = (String verificationId) {};
+    codeAutoRetrievalTimeout(String verificationId) {}
 
     try {
       await _auth.verifyPhoneNumber(

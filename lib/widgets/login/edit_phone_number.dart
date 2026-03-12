@@ -1,4 +1,3 @@
-import 'package:chat_app/new_screen/otp_screen.dart';
 import 'package:chat_app/services/auth_services.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/model/country_model.dart';
