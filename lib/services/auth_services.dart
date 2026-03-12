@@ -1,6 +1,5 @@
 import 'package:chat_app/model/country_model.dart';
 import 'package:chat_app/new_screen/otp_screen.dart';
-import 'package:chat_app/screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -72,7 +71,7 @@ class AuthClass {
   //7. call signInWithPhoneNumber (aka signInWithCredential)
 
   //after verifying sign in,
-  Future<void> signInWithPhoneNumber(
+  Future<bool> signInWithPhoneNumber(
     String verificationId,
     String smsCode,
     BuildContext context,
@@ -86,18 +85,12 @@ class AuthClass {
       print(verificationId);
       print(smsCode);
 
-      // UserCredential userCredential = await _auth.signInWithCredential(credential);
+      UserCredential userCredential = await _auth.signInWithCredential(credential);
 
-      //navigate to main page.
-      if (context.mounted) {
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (builder) => LoginScreen()),
-          (route) => false,
-        );
-      }
+      return true;
     } catch (e) {
       print(e.toString());
+      return false;
     }
   }
 }

@@ -1,4 +1,5 @@
 import 'package:chat_app/model/country_model.dart';
+import 'package:chat_app/screens/home_screen.dart';
 import 'package:chat_app/services/auth_services.dart';
 import 'package:chat_app/widgets/otp/otp_button.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,10 @@ class OtpScreen extends StatefulWidget {
 class _OtpScreenState extends State<OtpScreen> {
   AuthClass authClass = AuthClass();
   String smsCode = "";
+
+  //for UI OTP
+  bool showResult = false;
+  bool isSuccess = false;
 
   @override
   Widget build(BuildContext context) {
@@ -96,17 +101,51 @@ class _OtpScreenState extends State<OtpScreen> {
               borderWidth: 4.0,
               //runs when a code is typed in
               onCodeChanged: (String code) {
-                //handle validation or checks here if necessary
+                if (showResult) {
+                  setState(() {
+                    showResult = false;
+                  });
+                }
               },
               //runs when every textfield is filled
               onSubmit: (String verificationCode) async {
-                await authClass.signInWithPhoneNumber(
+                bool success = await authClass.signInWithPhoneNumber(
                   widget.verificationId,
                   verificationCode,
                   context,
                 );
+
+                setState(() {
+                  isSuccess = success;
+                  showResult = true;
+                });
+
+                if (context.mounted) {
+                  FocusScope.of(context).unfocus();
+                }
+
+                //navigate to main page.
+                if (context.mounted && isSuccess) {
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (builder) => HomeScreen()),
+                    (route) => false,
+                  );
+                }
               },
             ),
+            SizedBox(height: 15),
+            if (showResult)
+              Text(
+                isSuccess ? "Code verified!" : "Wrong code, try again",
+                style: TextStyle(
+                  color: isSuccess ? Colors.green[600] : Colors.red[600],
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
+              )
+            else
+              SizedBox(height: 19), // holds the space so layout doesn't jump
             SizedBox(height: 45),
             Text(
               "Enter 6-digit code",
