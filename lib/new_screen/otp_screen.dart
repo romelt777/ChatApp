@@ -145,7 +145,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 ),
               )
             else
-              SizedBox(height: 19), // holds the space so layout doesn't jump
+              SizedBox(height: 19),
             SizedBox(height: 45),
             Text(
               "Enter 6-digit code",
