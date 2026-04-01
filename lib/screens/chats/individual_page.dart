@@ -28,6 +28,7 @@ class _IndividualPageState extends State<IndividualPage> {
   ScrollController scrollController = ScrollController();
   final ImagePicker _picker = ImagePicker(); //for gallery image picker
   XFile? file; // cross platform file
+  late String chatId; //creating chatID
 
   @override
   void initState() {
@@ -35,6 +36,13 @@ class _IndividualPageState extends State<IndividualPage> {
     _connect();
     _setupFocusNodeListener();
     _setUpMessageListener();
+
+    //for prev messages in firebase
+    List<String> chatIdList = [currentUser!.id.toString(), widget.chatModel.id.toString()];
+    chatIdList.sort();
+    chatId = chatIdList.join("_");
+    fetchMessages(chatId);
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (scrollController.hasClients) {
         scrollController.animateTo(
@@ -145,14 +153,26 @@ class _IndividualPageState extends State<IndividualPage> {
       print("Connected from flutter");
       socket.on("message", (msg) {
         print(msg);
-        MessagesData().setMessage("destination", msg["message"], msg["time"], msg["path"]);
+        MessagesData().setMessage(
+          "destination",
+          msg["message"],
+          msg["time"],
+          msg["path"],
+          chatId,
+        );
       });
     });
   }
 
   //outgoing message
   void sendMessage(String message, int? sourceId, int targetId, String? path) {
-    MessagesData().setMessage("source", message, DateTime.now().toString().substring(10, 16), path);
+    MessagesData().setMessage(
+      "source",
+      message,
+      DateTime.now().toString().substring(10, 16),
+      path,
+      chatId,
+    );
     socket.emit("message", {
       "message": message,
       "sourceId": sourceId,
@@ -209,6 +229,7 @@ class _IndividualPageState extends State<IndividualPage> {
       message,
       DateTime.now().toString().substring(10, 16),
       path,
+      chatId,
     );
     socket.emit("message", {
       "message": message,
@@ -217,6 +238,31 @@ class _IndividualPageState extends State<IndividualPage> {
       "time": DateTime.now().toString().substring(10, 16),
       "path": data["path"],
     });
+  }
+
+  //receiving all messages, used in beginnign when opening chat
+  Future<void> fetchMessages(String chatId) async {
+    //url of server
+    final uri = Uri.parse("http://10.0.2.2:5000/route/messages/$chatId?userId=${currentUser!.id}");
+
+    final response = await http.get(uri);
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      List messages = data["messages"];
+
+      //setting all messages to flutter
+      for (var m in messages) {
+        MessagesData().setMessage(
+          m["type"],
+          m["message"],
+          m["time"],
+          m["path"],
+          chatId,
+        );
+      }
+    } else {
+      print("Failed to fetch messages");
+    }
   }
 
   @override
