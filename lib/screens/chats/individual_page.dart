@@ -179,6 +179,7 @@ class _IndividualPageState extends State<IndividualPage> {
       "targetId": targetId,
       "time": DateTime.now().toString().substring(10, 16),
       "path": path,
+      "chatId": chatId,
     });
   }
 
