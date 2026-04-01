@@ -22,7 +22,7 @@ class FileReply extends StatelessWidget {
               fit: StackFit.expand,
               children: [
                 Image.network(
-                  "http://10.0.2.2:5000/uploads/$path",
+                  path,
                   fit: BoxFit.cover,
                 ),
                 Positioned(
