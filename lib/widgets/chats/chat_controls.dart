@@ -15,7 +15,6 @@ class ChatControls extends StatelessWidget {
   final Function(String) sendButtonToggle;
   final Function(String, int?, int, String?) sendMessage;
   final int targetId;
-  final ScrollController scrollController;
   final ImagePicker picker;
   final XFile? file;
   final VoidCallback pickImage;
@@ -32,7 +31,6 @@ class ChatControls extends StatelessWidget {
     required this.sendButtonToggle,
     required this.sendMessage,
     required this.targetId,
-    required this.scrollController,
     required this.picker,
     required this.file,
     required this.pickImage,

@@ -4,8 +4,15 @@ class FileSelf extends StatelessWidget {
   final String? message;
   final String time;
   final String path;
+  final VoidCallback scrollToBottom;
 
-  const FileSelf({super.key, this.message, required this.time, required this.path});
+  const FileSelf({
+    super.key,
+    this.message,
+    required this.time,
+    required this.path,
+    required this.scrollToBottom,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +31,15 @@ class FileSelf extends StatelessWidget {
                 Image.network(
                   path,
                   fit: BoxFit.cover,
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) {
+                      //image is fully loaded
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        scrollToBottom();
+                      });
+                    }
+                    return child;
+                  },
                 ),
                 Positioned(
                   bottom: 0,

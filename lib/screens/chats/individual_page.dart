@@ -43,16 +43,6 @@ class _IndividualPageState extends State<IndividualPage> {
     chatId = chatIdList.join("_");
     fetchMessages(chatId);
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (scrollController.hasClients) {
-        scrollController.animateTo(
-          scrollController.position.maxScrollExtent,
-          duration: Duration(milliseconds: 300),
-          curve: Curves.easeOut,
-        );
-      }
-    });
-
     _scrollToBottom();
   }
 
@@ -294,7 +284,10 @@ class _IndividualPageState extends State<IndividualPage> {
             child: PopScope(
               child: Column(
                 children: [
-                  MessageList(scrollController: scrollController),
+                  MessageList(
+                    scrollController: scrollController,
+                    scrollToBottom: _scrollToBottom,
+                  ),
                   ChatControls(
                     controller: _controller,
                     focusNode: _focusNode,
@@ -305,7 +298,6 @@ class _IndividualPageState extends State<IndividualPage> {
                     sendButtonToggle: _updateSendButtonState,
                     sendMessage: sendMessage,
                     targetId: widget.chatModel.id,
-                    scrollController: scrollController,
                     picker: _picker,
                     file: file,
                     pickImage: pickImage,

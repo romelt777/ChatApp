@@ -7,7 +7,13 @@ import 'package:flutter/material.dart';
 
 class MessageList extends StatelessWidget {
   final ScrollController scrollController;
-  const MessageList({super.key, required this.scrollController});
+  final VoidCallback scrollToBottom;
+
+  const MessageList({
+    super.key,
+    required this.scrollController,
+    required this.scrollToBottom,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +32,7 @@ class MessageList extends StatelessWidget {
                 message: data.messages[index].message,
                 time: data.messages[index].time,
                 path: path,
+                scrollToBottom: scrollToBottom,
               );
             }
             return MessageSelf(
@@ -39,6 +46,7 @@ class MessageList extends StatelessWidget {
                 message: data.messages[index].message,
                 time: data.messages[index].time,
                 path: path,
+                scrollToBottom: scrollToBottom,
               );
             }
             return MessageReply(
