@@ -29,7 +29,7 @@ class MessageList extends StatelessWidget {
               );
             }
             return MessageSelf(
-              message: data.messages[index].message,
+              message: data.messages[index].message!,
               time: data.messages[index].time,
             );
           } else {
@@ -42,7 +42,7 @@ class MessageList extends StatelessWidget {
               );
             }
             return MessageReply(
-              message: data.messages[index].message,
+              message: data.messages[index].message!,
               time: data.messages[index].time,
             );
           }

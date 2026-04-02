@@ -229,7 +229,7 @@ class _IndividualPageState extends State<IndividualPage> {
       "source",
       message,
       DateTime.now().toString().substring(10, 16),
-      path,
+      data["path"],
       chatId,
     );
     socket.emit("message", {

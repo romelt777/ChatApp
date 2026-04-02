@@ -23,8 +23,8 @@ class FileSelf extends StatelessWidget {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                Image.file(
-                  File(path),
+                Image.network(
+                  path,
                   fit: BoxFit.cover,
                 ),
                 Positioned(
