@@ -52,6 +52,8 @@ class _IndividualPageState extends State<IndividualPage> {
         );
       }
     });
+
+    _scrollToBottom();
   }
 
   void _setUpMessageListener() {
@@ -98,6 +100,7 @@ class _IndividualPageState extends State<IndividualPage> {
   void dispose() {
     _focusNode.dispose();
     _controller.dispose();
+    MessagesData().clearMessages(chatId);
     MessagesData().removeListener(_onNewMessage);
     scrollController.dispose();
     super.dispose();
@@ -245,6 +248,7 @@ class _IndividualPageState extends State<IndividualPage> {
   Future<void> fetchMessages(String chatId) async {
     //url of server
     final uri = Uri.parse("http://10.0.2.2:5000/route/messages/$chatId?userId=${currentUser!.id}");
+    print(uri);
 
     final response = await http.get(uri);
     if (response.statusCode == 200) {
