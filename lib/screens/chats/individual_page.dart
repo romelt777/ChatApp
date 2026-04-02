@@ -98,10 +98,10 @@ class _IndividualPageState extends State<IndividualPage> {
 
   @override
   void dispose() {
+    MessagesData().removeListener(_onNewMessage);
+    MessagesData().clearMessages(chatId);
     _focusNode.dispose();
     _controller.dispose();
-    MessagesData().clearMessages(chatId);
-    MessagesData().removeListener(_onNewMessage);
     scrollController.dispose();
     super.dispose();
   }
