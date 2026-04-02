@@ -245,6 +245,7 @@ class _IndividualPageState extends State<IndividualPage> {
   Future<void> fetchMessages(String chatId) async {
     //url of server
     final uri = Uri.parse("http://10.0.2.2:5000/route/messages/$chatId?userId=${currentUser!.id}");
+    print(uri);
 
     final response = await http.get(uri);
     if (response.statusCode == 200) {
