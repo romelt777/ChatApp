@@ -28,4 +28,9 @@ class MessagesData extends ChangeNotifier {
     messages.add(messageModel);
     notifyListeners();
   }
+
+  void clearMessages(String chatId) {
+    messages.removeWhere((m) => m.chatId == chatId);
+    notifyListeners();
+  }
 }
